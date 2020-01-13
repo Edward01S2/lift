@@ -96,7 +96,7 @@
           @apply mt-4 block absolute bg-white w-56 border-t border-gray-200 border-l-4;
           border-left-color: #f68e3c;
           a {
-            @apply m-0;
+            @apply m-0 w-full;
             &:hover {
               @apply bg-l-orange text-white;
             }
