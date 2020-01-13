@@ -1,0 +1,342 @@
+<?php
+
+namespace App;
+
+/**
+ * Add <body> classes
+ */
+add_filter('body_class', function (array $classes) {
+    /** Add page slug if it doesn't exist */
+    if (is_single() || is_page() && !is_front_page()) {
+        if (!in_array(basename(get_permalink()), $classes)) {
+            $classes[] = basename(get_permalink());
+        }
+    }
+
+    /** Add class if sidebar is active */
+    if (display_sidebar()) {
+        $classes[] = 'sidebar-primary';
+    }
+
+    /** Clean up class names for custom templates */
+    $classes = array_map(function ($class) {
+        return preg_replace(['/-blade(-php)?$/', '/^page-template-views/'], '', $class);
+    }, $classes);
+
+    return array_filter($classes);
+});
+
+/**
+ * Add "… Continued" to the excerpt
+ */
+add_filter('excerpt_more', function () {
+    return ' &hellip; <a href="' . get_permalink() . '">' . __('Continued', 'sage') . '</a>';
+});
+
+/**
+ * Template Hierarchy should search for .blade.php files
+ */
+collect([
+    'index', '404', 'archive', 'author', 'category', 'tag', 'taxonomy', 'date', 'home',
+    'frontpage', 'page', 'paged', 'search', 'single', 'singular', 'attachment', 'embed'
+])->map(function ($type) {
+    add_filter("{$type}_template_hierarchy", __NAMESPACE__.'\\filter_templates');
+});
+
+/**
+ * Render page using Blade
+ */
+add_filter('template_include', function ($template) {
+    collect(['get_header', 'wp_head'])->each(function ($tag) {
+        ob_start();
+        do_action($tag);
+        $output = ob_get_clean();
+        remove_all_actions($tag);
+        add_action($tag, function () use ($output) {
+            echo $output;
+        });
+    });
+    $data = collect(get_body_class())->reduce(function ($data, $class) use ($template) {
+        return apply_filters("sage/template/{$class}/data", $data, $template);
+    }, []);
+    if ($template) {
+        echo template($template, $data);
+        return get_stylesheet_directory().'/index.php';
+    }
+    return $template;
+}, PHP_INT_MAX);
+
+/**
+ * Render comments.blade.php
+ */
+add_filter('comments_template', function ($comments_template) {
+    $comments_template = str_replace(
+        [get_stylesheet_directory(), get_template_directory()],
+        '',
+        $comments_template
+    );
+
+    $data = collect(get_body_class())->reduce(function ($data, $class) use ($comments_template) {
+        return apply_filters("sage/template/{$class}/data", $data, $comments_template);
+    }, []);
+
+    $theme_template = locate_template(["views/{$comments_template}", $comments_template]);
+
+    if ($theme_template) {
+        echo template($theme_template, $data);
+        return get_stylesheet_directory().'/index.php';
+    }
+
+    return $comments_template;
+}, 100);
+
+//Add acf data to story post type
+// add_filter('rest_prepare_story', function($data, $post, $request) {
+//     $_data = $data->data;    
+//     $fields = get_fields($post->ID);
+//     foreach ($fields as $key => $value){    
+//         $_data[$key] = get_field($key, $post->ID); 
+//     }
+//     $data->data = $_data;
+//     return $data;
+// });
+
+function story_endpoint ( $data ) {
+    if(isset($_GET['all'])) {
+      $posts = get_posts( array(
+        'post_type' => 'story',
+        'numberposts'=> '-1',
+    ) );
+    }
+    else {
+      $num = $_GET['count'];
+      $state_url = $_GET['state'];
+      $posts = get_posts( array(
+          'numberposts'   => $num,
+          //Here we can get more than one post type. Useful to a home page.
+          'post_type'     => 'story',
+          'meta_key'  => 'state',
+          'meta_value' => $state_url,
+      ) );
+    }
+    
+    if ( empty( $posts ) ) {
+        return null;
+    }
+    
+    $val = array();    
+    $count = 0;
+    foreach ( $posts as $post ) {
+      
+      //Get informations that is not avaible in get_post() function and store it in variables.\
+      $name = get_the_title($post->ID);
+      $state = get_field('state', $post->ID);
+      $img_large = get_the_post_thumbnail_url( $post->ID, 'large' );           // Large resolution (default 640px x 640px max)
+      $link = get_post_permalink($post->ID);
+
+      $val[$count]['img'] = $img_large;
+      $val[$count]['link'] = $link;
+      $val[$count]['name'] = $name;  
+      $val[$count]['state'] = $state;  
+      $count ++;
+    }
+    return $val;
+    //return $data['state'];
+}
+
+//wp-json/wpc/v1/story-home/?state-abbreviation
+add_action( 'rest_api_init', function () {
+  register_rest_route( 'wpc/v1', '/story/', 
+    array(
+        'methods' => 'GET',
+        'callback' => __NAMESPACE__ . '\\story_endpoint',
+    ) 
+  );
+} );
+
+function event_endpoint ( $data ) {
+  $args = array(
+    'post_type' => 'event',
+    'posts_per_page'=> '-1',
+    'order' => 'DESC',
+    'orderby' => 'meta_value_num',
+    'meta_key' => 'event_date',
+    'suppress_filters' => true,
+    'meta_query' => array (
+      array (
+        'key' => 'event_date',
+        'value' => date('Ymd'),
+        'type' => 'DATE',
+        'compare' => '<'
+      )
+    )
+  );
+  remove_all_filters('posts_orderby');
+  $posts = new \WP_Query( $args );
+  //return $posts;
+  // if ( empty( $posts ) ) {
+  //     return null;
+  // }
+  
+  $val = array();    
+  //return 'Got Here';
+  $index = 0;
+  if ( $posts->have_posts() ) {
+    while ( $posts->have_posts() ) : $posts->the_post(); 
+    
+    // //   //Get informations that is not avaible in get_post() function and store it in variables.\
+    // //   //$state = get_field('state', $post->ID);
+      $id = get_the_ID();
+      //$val[$id]['id'] = $id;
+
+      $name = get_the_title();
+      $image = get_the_post_thumbnail_url();
+      $link = get_permalink();
+      $date = get_field('event_date');
+      $day = date('M', strtotime( $date ));
+      $month = date('d', strtotime( $date ));
+      $start = get_field('start_time');
+      $end = get_field('end_time');
+      $location = get_field('location');
+      $address = get_field('address');
+
+      $val[$index]['name'] = $name;
+      $val[$index]['image'] = $image;
+      $val[$index]['link'] = $link; 
+      $val[$index]['date'] = $date;
+      $val[$index]['day'] = $day; 
+      $val[$index]['month'] = $month;  
+      $val[$index]['start'] = $start; 
+      $val[$index]['end'] = $end; 
+      $val[$index]['location'] = $location; 
+      $val[$index]['address'] = $address;  
+      $index ++;
+    endwhile;
+  return $val;
+  // //return $data['state'];
+  }
+  else {
+    return null;
+  }
+}
+
+//wp-json/wpc/v1/event/?2
+add_action( 'rest_api_init', function () {
+register_rest_route( 'wpc/v1', 
+  '/event/(?P<count>\d+)', 
+  array(
+      'methods' => 'GET',
+      'callback' => __NAMESPACE__ . '\\event_endpoint',
+  ) 
+);
+} );
+
+function post_endpoint ( $data ) {
+
+  if(isset($_GET['offset'])) {
+    $offset = $_GET['offset'];
+  }
+  if(isset($_GET['count'])) {
+    $count = $_GET['count'];
+  }
+
+  $query_args = array(
+      'numberposts'   => $count,
+      //Here we can get more than one post type. Useful to a home page.
+      'post_type'     => 'post',
+      'offset'=> $offset,
+  );
+
+  if(isset($_GET['tag'])) {
+    $query_args['tag'] = $_GET['tag'];
+  } 
+
+  if(isset($_GET['cat'])) {
+    $query_args['category_name'] = $_GET['cat'];
+  } 
+
+  $query = new \WP_Query($query_args);
+  //return($query);
+  
+  if(isset($_GET['trim'])) {
+    $trim = $_GET['trim'];
+  }   
+
+  
+  $val = array();
+  
+  $index = 0;
+  if ( $query->have_posts() ) {
+    while ( $query->have_posts() ) : $query->the_post(); 
+  // $count = 0;
+  // foreach ( $posts as $post ) {
+    
+  //   //Get informations that is not avaible in get_post() function and store it in variables.\
+    $name = get_the_title();
+    $img = get_the_post_thumbnail_url();           // Large resolution (default 640px x 640px max)
+    $link = get_post_permalink();
+    $content = wp_trim_words(get_post_field('post_content'), $trim, '...');
+    $date = get_the_date('F d, Y');
+
+    $val[$index]['img'] = $img;
+    $val[$index]['link'] = $link;
+    $val[$index]['name'] = $name;  
+    $val[$index]['content'] = $content;
+    $val[$index]['date'] = $date;  
+    $index ++;
+  // }
+  // return $val;
+  //return $data['state'];
+  endwhile;
+  return $val;
+// //return $data['state'];
+  }
+  else {
+    return null;
+  }
+}
+
+//wp-json/wpc/v1/story-home/?state-abbreviation
+add_action( 'rest_api_init', function () {
+register_rest_route( 'wpc/v1', '/posts/', 
+  array(
+      'methods' => 'GET',
+      'callback' => __NAMESPACE__ . '\\post_endpoint',
+  ) 
+);
+} );
+
+function search_stories(){
+    //$search = sanitize_text_field( $_POST[ 'search_string' ] );
+    $search = isset($_POST['search_string']) ? $_POST['search_string'] : 0;
+    
+    $args = array(
+        'post_type' => 'story',
+        'posts_per_page' => 8,
+        's' => $search
+    );
+    
+    //echo $search;
+    $wp_query = new \WP_Query( $args );
+
+    // echo $wp_query;
+
+    if( $wp_query->have_posts() ) {
+      while( $wp_query->have_posts() ) : $wp_query->the_post();
+
+      echo \App\template(locate_template('views/partials/content-story-box'));
+      /* end loop */
+      endwhile;
+    } 
+    else {
+      echo 'Error in search_stories()'; 
+    } 
+    wp_reset_query();
+    
+    die();
+    
+}
+
+add_action('wp_ajax_search_stories', __NAMESPACE__ . '\\search_stories');
+add_action('wp_ajax_nopriv_search_stories', __NAMESPACE__ . '\\search_stories');
+

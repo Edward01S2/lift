@@ -1,0 +1,8 @@
+// Global styles are set in the Tailwind config using a plugin
+html {
+  @apply text-black font-open;
+}
+
+a {
+  @apply text-l-orange;
+}

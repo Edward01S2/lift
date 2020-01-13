@@ -1,0 +1,73 @@
+.nav-primary {
+  @apply flex flex-col text-left pb-6;
+  // & li:last-child {
+  //   @apply pb-6;
+  // }
+  a {
+    @apply text-black;
+  }
+  .active{
+    a {
+      @apply text-l-orange;
+    }
+    .sub-menu .menu-item a {
+      @apply text-black;
+      &:hover {
+        @apply text-l-orange;
+      }
+    }
+  }
+  .menu-item {
+    @apply p-0;
+    a {
+      @apply uppercase font-open font-semibold px-6 py-4 text-base tracking-widest block;
+      &:hover {
+        @apply text-l-orange;
+      }
+    }
+  }
+
+  .sub-menu {
+    .menu-item {
+      @apply p-0;
+    }
+    a {
+      @apply ml-4 text-sm py-3;
+    }
+  }
+}
+
+@screen md {
+  .nav-primary {
+    @apply py-6;
+  }
+}
+
+@screen lg {
+  .nav-primary {
+    @apply flex flex-row items-center py-0;
+    .sub-menu {
+      @apply hidden;
+    }
+    .menu-item-has-children {
+      @apply relative;
+      &:hover {
+        .sub-menu {
+          @apply block absolute bg-white w-56 border-l-4 border-l-orange;
+          a {
+            @apply m-0;
+            &:hover {
+              @apply bg-l-orange text-white;
+            }
+          }
+        }
+      }
+    }
+    .menu-join-us a {
+      @apply bg-l-blue text-white py-2 px-8 text-sm ml-4;
+      &:hover {
+        @apply bg-l-orange text-white;
+      }
+    }
+  }
+}
