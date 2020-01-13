@@ -199,5 +199,3 @@ if (function_exists('add_filter')) {
         return $paths;
     });
   }
-
-  

@@ -18,7 +18,7 @@ export default {
               var str = '<div class="home-story">'
               $.each(data, function(i, story) {
                 if(story.img) {
-                  str +='<a href="' + story.link + '">';
+                  str +='<a class="transform hover:scale-101" href="' + story.link + '">';
                   str +='<img src="' + story.img + '"/>';
                   str +='</a>';
                   $('.story-btn').addClass('md:-mt-10 lg:-mt-12');
@@ -68,7 +68,7 @@ export default {
         var str = '<div class="home-story">'
         $.each(data, function(i, story) {
           if(story.img) {
-            str +='<a href="' + story.link + '">';
+            str +='<a class="transform hover:scale-101" href="' + story.link + '">';
             str +='<img src="' + story.img + '"/>';
             str +='</a>';
             $('.story-btn').addClass('md:-mt-10 lg:-mt-12');

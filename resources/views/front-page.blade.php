@@ -15,7 +15,7 @@
     </div>
     <div class="relative md:w-1/2">
       <div class="content-container relative lg:absolute lg:top-0 lg:left-0 w-full h-full z-20 flex flex-col justify-center items-center opacity-99" style="background-image:url({!! $video_poster->url !!}); background-size: cover;">
-        <div class="play-container text-center z-30">
+        <div class="play-container text-center z-30 py-20">
           <a href="{!! $video_url !!}" data-lity id="toggle-video" class="cursor-pointer outline-none focus:outline-none bg-l-orange inline-block rounded-full group hover:bg-white">
             <svg class="fill-current text-white h-16 w-16 p-2 pl-3 block cursor-pointer outline-none hover:text-white group-hover:text-l-orange lg:h-20 lg:w-20 xl:h-24 xl:w-24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
           </a>
@@ -42,7 +42,7 @@
             </div>
             <div id="story-container" class="px-2 pl-0"></div>
             <div class="story-btn p-4 md:p-0">
-              <a href="{!! $story_button->url !!}" class="uppercase py-2 px-10 bg-l-blue text-white font-semibold hover:bg-l-orange inline-block text-center tracking-wide md:text-sm md:px-4 lg:text-base lg:px-6 lg:mt-1 xl:text-lg xl:mt-0 xl:px-8">{!! $story_button->title !!}</a>
+              <a href="{!! $story_button->url !!}" class="uppercase py-2 px-10 bg-l-blue text-white font-semibold hover:bg-l-orange hover:text-white inline-block text-center tracking-wide md:text-sm md:px-4 lg:text-base lg:px-6 lg:mt-1 xl:text-lg xl:mt-0 xl:px-8">{!! $story_button->title !!}</a>
             </div>
           </div>
         </div>

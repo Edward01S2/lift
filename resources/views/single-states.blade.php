@@ -15,7 +15,7 @@
       </div>
       <div class="relative md:w-1/2">
         <div class="content-container relative w-full h-full z-20 flex flex-col justify-center items-center opacity-99" style="background-image:url({!! $video_poster->url !!}); background-size: cover;">
-          <div class="play-container text-center z-30 py-16 md:py-20 lg:py-24 xl:py-40">
+          <div class="play-container text-center z-30 py-16 md:py-20 lg:py-24 xl:py-48">
             <a href="{!! $video_url !!}" data-lity id="toggle-video" class="cursor-pointer outline-none focus:outline-none bg-l-orange inline-block rounded-full group hover:bg-white">
               <svg class="fill-current text-white h-16 w-16 p-2 pl-3 block cursor-pointer outline-none hover:text-white group-hover:text-l-orange lg:h-20 lg:w-20 xl:h-24 xl:w-24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
             </a>
@@ -95,7 +95,7 @@
       <h2 class="text-center font-semibold px-4 text-2xl leading-tight pb-4 md:px-40 md:pb-8 xl:text-3xl">Digitally Empowered Small Businesses in {!! $state->label !!}</h2>
       <div class="flex flex-col md:flex-row md:px-4 xl:px-0">
         <div class="md:w-1/2">
-          <a class="relative block w-full h-full" href="{!! $get_state[0]['link'] !!}">
+          <a class="relative block w-full h-full transform hover:scale-101" href="{!! $get_state[0]['link'] !!}">
             <div class="h-68 lg:h-72 xl:h-78">
               <div class="story-gradient"></div>
               <img class="w-full h-full object-cover object-center z-20" src="{!! $get_state[0]['image'] !!}" alt="">
@@ -103,13 +103,13 @@
             </div>
           </a>
         </div>
-        <div class="md:w-1/2 h-68 grid grid-cols-3 gap-4 mt-4 mx-4 grid-rows-3 md:mx-0 md:pl-4 lg:h-72 xl:h-78">
+        <div class="md:w-1/2 grid grid-cols-2 gap-4 mt-4 mx-4 grid-rows-3 md:mt-0 md:grid-cols-3 md:mx-0 md:pl-4 lg:h-72 xl:h-78">
           @foreach($get_state as $state)
             @if($loop->index > 0)
-              <a class="relative block h-36" href="{!! $state['link'] !!}">
+              <a class="relative block w-full h-40 md:h-full lg:h-full transform hover:scale-101" href="{!! $state['link'] !!}">
                 <div class="story-gradient z-40"></div>
                 <img class="w-full h-full absolute object-cover object-center z-20" src="{!! $state['image'] !!}" alt="">
-                <p class="text-white absolute bottom-0 left-0 z-30 text-xs leading-tight mx-1 mb-1 font-semibold xl:text-sm xl:mx-2 xl:mb-2">{!! $state['company'] !!}</p>
+                <p class="text-white absolute bottom-0 left-0 z-30 text-sm leading-tight mx-1 mb-1 font-semibold lg:text-sm xl:text-base xl:mx-2 xl:mb-2">{!! $state['company'] !!}</p>
               </a>
             @endif
           @endforeach
@@ -127,7 +127,7 @@
         <div class="md:w-1/2">
           <div class="grid grid-cols-2 gap-4 px-4">
             @foreach($get_state[0]['gallery'] as $img)
-              <a href="{!! $img['url'] !!}">
+              <a class="transform hover:scale-101" href="{!! $img['url'] !!}">
                 <div class="relative w-full h-40">
                   <img class="w-full h-full absolute object-cover object-center" src="{!! $img['url'] !!}" alt="" data-lity>
                 </div>

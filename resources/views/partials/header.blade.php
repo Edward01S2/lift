@@ -1,6 +1,6 @@
-<header class="banner relative bg-white z-40 lg:w-full lg:z-30">
+<header class="banner relative bg-white z-40 lg:w-full lg:z-30 lg:shadow lg:shadow-md">
   <div class="container mx-auto">
-    <nav class="flex items-center justify-between flex-wrap py-2 md:py-4 lg:flex-no-wrap xl:px-0">
+    <nav class="flex items-center justify-between flex-wrap py-2 md:py-4 lg:py-0 lg:flex-no-wrap xl:px-0">
       <div id="nav-brand" class="flex items-center flex-shrink-0 pl-4 md:pl-4 xl:pl-0">
         <a class="brand hover:opacity-50" href="{{ home_url('/') }}">
           <img class="h-10 md:h-12" src="{{ $options_page->options['logo']['url'] }}" alt="">  

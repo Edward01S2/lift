@@ -27,7 +27,44 @@
     }
   }
 
+  .menu-item-has-children {
+    @apply relative z-10 cursor-pointer;
+    a {
+      @apply w-1/2;
+    }
+
+  }
+  .caret-down {
+    &:before {
+      @apply bg-l-blue fill-current stroke-current;
+      position: absolute;
+      content: '';
+      mask: url('../images/cheveron-down.svg') no-repeat 50% 50%;
+      height: 24px;
+      width: 24px;
+      padding: 15px;
+      top: 12px;
+      right: 24px;
+      z-index:20;
+    }
+  }
+  .caret-up {
+    &:before {
+      @apply bg-l-blue fill-current stroke-current;
+      position: absolute;
+      content: '';
+      mask: url('../images/cheveron-up.svg') no-repeat 50% 50%;
+      height: 24px;
+      width: 24px;
+      padding: 15px;
+      top: 12px;
+      right: 24px;
+      z-index:20;
+    }
+  }
+
   .sub-menu {
+    @apply hidden;
     .menu-item {
       @apply p-0;
     }
@@ -49,15 +86,36 @@
     .sub-menu {
       @apply hidden;
     }
+    .menu-item {
+      @apply py-4;
+    }
     .menu-item-has-children {
       @apply relative;
       &:hover {
         .sub-menu {
-          @apply block absolute bg-white w-56 border-l-4 border-l-orange;
+          @apply mt-4 block absolute bg-white w-56 border-t border-gray-200 border-l-4;
+          border-left-color: #f68e3c;
           a {
             @apply m-0;
             &:hover {
               @apply bg-l-orange text-white;
+            }
+          }
+        }
+      }
+    }
+    .menu-stories {
+      @apply relative;
+      &:hover {
+        .sub-menu {
+          @apply w-84 px-4 h-auto shadow bg-l-gray shadow-md left-0 border-l-4 grid grid-cols-3 py-3 pl-5;
+          border-left-color: #f68e3c;
+          li{
+            a {
+              @apply p-0 py-2 text-sm;
+              &:hover {
+                @apply bg-transparent text-l-orange;
+              }
             }
           }
         }
@@ -69,5 +127,11 @@
         @apply bg-l-orange text-white;
       }
     }
+    .caret-down, .caret-up {
+      &:before {
+        @apply hidden;
+      }
+    }
   }
 }
+
