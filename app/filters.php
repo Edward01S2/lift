@@ -309,15 +309,18 @@ register_rest_route( 'wpc/v1', '/posts/',
 function search_stories(){
     //$search = sanitize_text_field( $_POST[ 'search_string' ] );
     $search = isset($_POST['search_string']) ? $_POST['search_string'] : 0;
-    
+    //$multi = preg_replace('/\s+/', '+', $search);
+    //echo $search;
     $args = array(
         'post_type' => 'story',
-        'posts_per_page' => 8,
+        'posts_per_page' => -1,
         's' => $search
     );
     
     //echo $search;
-    $wp_query = new \WP_Query( $args );
+    $wp_query = new \WP_Query();
+    $wp_query->parse_query($args);
+    relevanssi_do_query($wp_query);
 
     // echo $wp_query;
 
@@ -329,7 +332,7 @@ function search_stories(){
       endwhile;
     } 
     else {
-      echo 'Error in search_stories()'; 
+      echo '<div class="story-none text-center text-xl py-4 text-l-blue md:text-2xl md:col-span-3 lg:col-span-4">Sorry. No results found.</div>';
     } 
     wp_reset_query();
     

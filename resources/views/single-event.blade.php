@@ -4,12 +4,12 @@
 @while(have_posts()) @php the_post() @endphp
   <section class="hero">
     @if( App::featImage()) 
-      <div class="relative bg-l-blue overflow-hidden">
+      <div class="relative bg-l-blue-100 overflow-hidden">
         <div class="relative event-bg-image">
           <img class="w-full absolute top-0 left-0 opacity-75 object-cover border-b-2 border-l-teal border-dashed md:h-72 xl:h-76" src="{!! App::featImage() !!}" alt="">
         </div>   
     @else 
-      <div class="bg-l-blue">
+      <div class="bg-l-blue-100">
     @endif
       <div class="relative container mx-auto z-20">
         <div class="p-4 md:flex md:items-center md:py-8 lg:justify-center">
@@ -58,7 +58,7 @@
     </div> {{--  Close background div --}}
   </section>
 
-  <section class="agenda bg-l-blue p">
+  <section class="agenda-bg bg-l-blue-100">
     <div class="p-4 container mx-auto lg:flex lg:pb-12">
       @if($speakers)
       <div class="bg-white p-8 text-l-blue text-lg lg:w-3/5">
@@ -89,8 +89,8 @@
           <h3 class="text-3xl font-semibold uppercase pb-4 text-white">Speakers</h3>
           <div class="speaker-container md:flex md:flex-wrap">
             @foreach($speakers as $item)
-            <a class="text-white md:w-1/2 lg:w-1/2" href="{!! $item->link!!}">
-              <div class="speaker text-center pb-8">
+            <a class="text-white md:w-1/2 lg:w-1/2 group" href="{!! $item->link!!}">
+              <div class="speaker text-center pb-8 group-hover:text-l-peach">
                 <div class="py-4">
                   <div class="relative rounded-full overflow-hidden w-64 h-64 mx-auto lg:w-32 lg:h-32 xl:w-40 xl:h-40">
                     <img class="w-full h-full object-cover object-center absolute" src="{!! $item->image->url !!}" alt="">
@@ -107,53 +107,53 @@
         </div>
       @endif
     </div>
-  </section>
 
-  <section class="event-map">
-    <div class="container mx-auto">
-      <div class="p-4 text-center md:pt-12">
-        <h2 class="text-3xl font-semibold uppercase pb-4">Location</h2>
-        @if($location)
-          <h3 class="text-xl font-semibold">{!! $location !!}</h3>
-        @endif
-        <h4 class="text-xl font-semibold px-8">{!! $address !!}</h4>
-        @if($map_content)
-        <div class="p-8 text-l-gray-dark">
-          {!! $map_content !!}
-        </div>
-        @endif
-      </div>
-      <div>
-        <div class="map-container lg:p-8 lg:flex xl:p-0 xl:pt-8">
-          @if($map_image)
-            <div class="map h-64 lg:w-1/2">
-          @else 
-            <div class="map h-64">
+    <div class="event-map">
+      <div class="container mx-auto">
+        <div class="p-4 text-center text-white md:pt-12">
+          <h2 class="text-3xl font-semibold uppercase pb-4">Location</h2>
+          @if($location)
+            <h3 class="text-xl font-semibold">{!! $location !!}</h3>
           @endif
-            {!! $map_embed_code !!}
+          <h4 class="text-xl font-semibold px-8">{!! $address !!}</h4>
+          @if($map_content)
+          <div class="p-8 text-white">
+            {!! $map_content !!}
           </div>
-          @if($map_image)
-            <div class="hidden lg:block lg:w-1/2">
-              <img class="w-full h-full object-cover" src="{!! $map_image !!}" alt="">
-            </div>
           @endif
+        </div>
+        <div>
+          <div class="map-container lg:p-8 lg:flex xl:p-0 xl:pt-8">
+            @if($map_image)
+              <div class="map h-64 lg:w-1/2">
+            @else 
+              <div class="map h-64">
+            @endif
+              {!! $map_embed_code !!}
+            </div>
+            @if($map_image)
+              <div class="hidden lg:block lg:w-1/2">
+                <img class="w-full h-full object-cover" src="{!! $map_image !!}" alt="">
+              </div>
+            @endif
+          </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <section id="home-form" class="xl:py-8">
-    <div class="bg-l-blue container mx-auto">
-      <div class="flex flex-col text-white text-center py-8 md:flex-row md:text-left md:pl-4 md:items-center lg:px-8">
-        <div class="pb-8 md:pb-0 md:w-1/3">
-          <h3 class="font-semibold text-3xl tracking-wider md:text-lg lg:text-xl xl:text-2xl">{!! $options_page->options['form_1_text'] !!}</h3>
-          <p class="tracking-widest text-lg md:text-xs xl:text-base">{!! $options_page->options['form_2_text']  !!}</p>
-        </div>
-        @php
-          gravity_form_enqueue_scripts($options_page->options['form']['id'], true);
-          gravity_form($options_page->options['form']['id'], false, false, false, '', true, 1);
-        @endphp
-    </div>
+  
+    <div id="home-form" class="xl:py-8">
+      <div class="bg-l-blue container mx-auto">
+        <div class="flex flex-col text-white text-center py-8 md:flex-row md:text-left md:pl-4 md:items-center lg:px-8">
+          <div class="pb-8 md:pb-0 md:w-1/3">
+            <h3 class="font-semibold text-3xl tracking-wider md:text-lg lg:text-xl xl:text-2xl">{!! $options_page->options['form_1_text'] !!}</h3>
+            <p class="tracking-widest text-lg md:text-xs xl:text-base">{!! $options_page->options['form_2_text']  !!}</p>
+          </div>
+          @php
+            gravity_form_enqueue_scripts($options_page->options['form']['id'], true);
+            gravity_form($options_page->options['form']['id'], false, false, false, '', true, 1);
+          @endphp
+      </div>
+      </div>
     </div>
   </section>
   

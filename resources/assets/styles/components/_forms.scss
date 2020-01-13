@@ -33,6 +33,29 @@
   @apply hidden;
 }
 
+.ginput_container_select {
+  @apply relative z-10 cursor-pointer;
+  &:before {
+    @apply bg-l-blue fill-current stroke-current;
+    position: absolute;
+    content: '';
+    mask: url('../images/cheveron-down.svg') no-repeat 50% 50%;
+    height: 20px;
+    width: 20px;
+    top: 14px;
+    right: 10px;
+    z-index:20;
+    pointer-events: none;
+  }
+  select{
+    @apply cursor-pointer;
+  }
+}
+
+input[type='checkbox'] {
+  @apply cursor-pointer;
+}
+
 .gform_wrapper {
   @apply px-4 w-full text-black;
   .gfield {
@@ -53,7 +76,7 @@
   .gform_button {
     @apply w-full bg-l-orange text-white py-3 uppercase font-semibold tracking-wider;
     &:hover {
-      @apply opacity-75 cursor-pointer;
+      @apply bg-l-blue-100 cursor-pointer;
     }
   }
 }
@@ -128,7 +151,7 @@
 //GFORM#3
 #gform_wrapper_3 {
   .ginput_container input, textarea {
-    @apply border-2 border-l-gray rounded;
+    @apply border-2 border-gray-300 rounded;
   }
   .gform_button {
     &:hover {

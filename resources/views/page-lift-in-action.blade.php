@@ -10,7 +10,7 @@
     <div class="new-container grid grid-cols-1 gap-4 pb-8 md:grid-cols-8 lg:px-4 lg:pt-4 xl:px-0">
       @foreach($current_loop as $post)
         @if ($loop->index < 1)
-        <a class="group news-post md:col-span-4" href="{!! $post['link'] !!}">
+        <a class="group news-post md:col-span-4 transform hover:scale-101" href="{!! $post['link'] !!}">
           <div class="flex flex-col">
             <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
               <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">
@@ -19,12 +19,12 @@
               <p class="text-sm uppercase text-l-gray-dark">{!! $post['date'] !!}</p>
               <h3 class="text-2xl font-semibold leading-tight">{!! $post['name'] !!}</h3>
               <p class="py-2">{!! $post['content'] !!}</p>
-              <p class="text-l-orange uppercase text-sm group-hover:text-l-blue">Read More ></p>
+              <p class="text-l-orange uppercase text-sm">Read More ></p>
           </div>
         </div>
         </a>
         @elseif($loop->index < 3)
-        <a class="group news-post md:col-span-4 lg:col-span-2" href="{!! $post['link'] !!}">
+        <a class="group news-post md:col-span-4 lg:col-span-2 transform hover:scale-101" href="{!! $post['link'] !!}">
           <div class="flex flex-col">
             <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
               <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">
@@ -33,12 +33,12 @@
               <p class="text-sm uppercase text-l-gray-dark">{!! $post['date'] !!}</p>
               <h3 class="text-2xl font-semibold leading-tight">{!! $post['name'] !!}</h3>
               <p class="py-2">@php echo wp_trim_words($post['content'], 25, '...') @endphp</p>
-              <p class="text-l-orange uppercase text-sm group-hover:text-l-blue">Read More ></p>
+              <p class="text-l-orange uppercase text-sm">Read More ></p>
             </div>
           </div>
         </a>
         @elseif($loop->index < 5)
-        <a class="group news-post md:col-span-4 lg:-mt-16 lg:col-span-2" href="{!! $post['link'] !!}">
+        <a class="group news-post md:col-span-4 lg:-mt-16 lg:col-span-2 transform hover:scale-101" href="{!! $post['link'] !!}">
           <div class="flex flex-col">
             <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
               <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">
@@ -47,12 +47,12 @@
               <p class="text-sm uppercase text-l-gray-dark">{!! $post['date'] !!}</p>
               <h3 class="text-2xl font-semibold leading-tight">{!! $post['name'] !!}</h3>
               <p class="py-2">@php echo wp_trim_words($post['content'], 25, '...') @endphp</p>
-              <p class="text-l-orange uppercase text-sm group-hover:text-l-blue">Read More ></p>
+              <p class="text-l-orange uppercase text-sm">Read More ></p>
             </div>
           </div>
         </a>
         @elseif($loop->index < 6)
-          <a class="group news-post md:col-span-4" href="{!! $post['link'] !!}">
+          <a class="group news-post md:col-span-4 transform hover:scale-101" href="{!! $post['link'] !!}">
             <div class="flex flex-col">
               <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
                 <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">
@@ -61,12 +61,12 @@
                 <p class="text-sm uppercase text-l-gray-dark">{!! $post['date'] !!}</p>
                 <h3 class="text-2xl font-semibold leading-tight">{!! $post['name'] !!}</h3>
                 <p class="py-2">{!! $post['content'] !!}</p>
-                <p class="text-l-orange uppercase text-sm group-hover:text-l-blue">Read More ></p>
+                <p class="text-l-orange uppercase text-sm">Read More ></p>
             </div>
           </div>
           </a>
         @else
-        <a class="group news-post md:col-span-4 lg:col-span-2" href="{!! $post['link'] !!}">
+        <a class="group news-post md:col-span-4 lg:col-span-2 transform hover:scale-101" href="{!! $post['link'] !!}">
           <div class="flex flex-col">
             <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
               <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">
@@ -75,7 +75,7 @@
               <p class="text-sm uppercase text-l-gray-dark">{!! $post['date'] !!}</p>
               <h3 class="text-2xl font-semibold leading-tight">{!! $post['name'] !!}</h3>
               <p class="py-2">@php echo wp_trim_words($post['content'], 25, '...') @endphp</p>
-              <p class="text-l-orange uppercase text-sm group-hover:text-l-blue">Read More ></p>
+              <p class="text-l-orange uppercase text-sm">Read More ></p>
             </div>
           </div>
         </a>

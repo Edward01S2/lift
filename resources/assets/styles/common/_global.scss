@@ -4,5 +4,12 @@ html {
 }
 
 a {
-  @apply text-l-orange;
+  @apply text-l-orange transition-all duration-150;
+  &:hover {
+    @apply text-l-blue;
+  }
+}
+
+button {
+  @apply transition-all duration-150;
 }

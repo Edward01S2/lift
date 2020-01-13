@@ -43,7 +43,7 @@ export default {
             str += '<p class="text-xs uppercase text-l-gray-dark xl:pb-2">' + post.date + '</p>'
             str += '<h3 class="font-semibold pb-2 leading-tight text-lg xl:text-xl">' + post.name + '</h3>'
             str += '<p class="hidden md:block md:text-sm md:pb-2 xl:text-base">' + post.content + '</p>'
-            str += '<p class="text-l-orange uppercase text-xs group-hover:text-l-blue xl:text-sm">Read More ></p>'
+            str += '<p class="text-l-orange uppercase text-xs xl:text-sm">Read More ></p>'
             str += '</div>'
             str += '</div>'
             str += '</a>' 

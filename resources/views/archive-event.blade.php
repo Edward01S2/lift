@@ -10,9 +10,9 @@
   <section>
     <div class="event-container container mx-auto lg:mt-4 xl:pt-8">
       @foreach($current_loop as $event)
-      <article>
-        <a href="{!! $event['link'] !!}" class="group event">
-          <div class="group-hover:opacity-75 md:flex md:p-4 lg:shadow lg:shadow-md lg:p-0 lg:m-4 lg:mb-4 xl:mb-8 xl:mx-0">
+      <article class="group transform transition-300 hover:scale-101">
+        <a href="{!! $event['link'] !!}" class="event">
+          <div class="md:flex md:p-4 lg:shadow lg:shadow-md lg:p-0 lg:m-4 lg:mb-4 xl:mb-8 xl:mx-0">
             <div class="relative md:w-1/2">
               <img class="w-full h-full xl:object-cover xl:object-center xl:h-66" src="{!! $event['image'] !!}" alt="">
               <div class="absolute top-0 left-0">
@@ -34,7 +34,7 @@
       @endforeach
     </div>
     <div class="event-btn-container text-center py-8 lg:pb-8">
-      <button class="archive-event text-white uppercase bg-l-blue font-semibold px-4 py-2 tracking-wide lg:px-8 lg:py-4 lg:text-lg">Load Archived Events</button>
+      <button class="archive-event text-white uppercase bg-l-blue font-semibold px-4 py-2 tracking-wide lg:px-8 lg:py-4 lg:text-lg hover:bg-l-orange">Load Archived Events</button>
     </div>
   </section>
  

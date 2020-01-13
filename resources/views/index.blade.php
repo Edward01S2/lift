@@ -20,7 +20,7 @@
                 <p class="text-sm uppercase text-l-gray-dark">{!! $post['date'] !!}</p>
                 <h3 class="text-2xl font-semibold leading-tight">{!! $post['name'] !!}</h3>
                 <p class="py-2">{!! $post['content'] !!}</p>
-                <p class="text-l-orange uppercase text-sm group-hover:text-l-blue">Read More ></p>
+                <p class="text-l-orange uppercase text-sm">Read More ></p>
             </div>
           </div>
           </a>
@@ -34,7 +34,7 @@
                 <p class="text-xs uppercase text-l-gray-dark xl:pb-2">{!! $post['date'] !!}</p>
                 <h3 class="font-semibold pb-2 leading-tight text-lg xl:text-xl">{!! $post['name'] !!}</h3>
                 <p class="hidden md:block md:text-sm md:pb-2 xl:text-base">@php echo wp_trim_words($post['content'], 15, '...') @endphp</p>
-                <p class="text-l-orange uppercase text-xs group-hover:text-l-blue xl:text-sm">Read More ></p>
+                <p class="text-l-orange uppercase text-xs xl:text-sm">Read More ></p>
               </div>
             </div>
             </a> 

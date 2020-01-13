@@ -9,11 +9,11 @@
         <h1 class="text-2xl text-left font-semibold leading-tight border-l-4 pl-4 py-2 border-l-orange tracking-wider lg:text-4xl xl:text-5xl xl:border-l-8">{!! $line_1 !!}</h1>
         <div class="flex flex-col pt-4 md:flex-row md:items-center lg:pl-3 xl:pl-4">
           <div><a href="{!! $hero_button->url !!}" class="uppercase py-2 px-6 text-black hover:text-l-orange inline-block text-center font-semibold tracking-wide md:text-sm md:px-4 xl:text-base">{!! $hero_button->title !!}</a></div>
-          <div class="pt-2 md:pt-0"><a href="{!! $hero_button_2->url !!}" class="uppercase py-2 px-10 bg-l-blue text-white hover:bg-l-orange inline-block text-center ml-6 md:text-sm md:px-6 xl:text-base">{!! $hero_button_2->title !!}</a></div>
+          <div class="pt-2 md:pt-0"><a href="{!! $hero_button_2->url !!}" class="uppercase py-2 px-10 bg-l-blue text-white font-semibold hover:bg-l-orange inline-block text-center ml-6 md:text-sm md:px-6 xl:text-base">{!! $hero_button_2->title !!}</a></div>
         </div>
       </div>
     </div>
-    <div class="relative md:w-1/2 ">
+    <div class="relative md:w-1/2">
       <div class="content-container relative lg:absolute lg:top-0 lg:left-0 w-full h-full z-20 flex flex-col justify-center items-center opacity-99" style="background-image:url({!! $video_poster->url !!}); background-size: cover;">
         <div class="play-container text-center z-30">
           <a href="{!! $video_url !!}" data-lity id="toggle-video" class="cursor-pointer outline-none focus:outline-none bg-l-orange inline-block rounded-full group hover:bg-white">
@@ -52,11 +52,11 @@
 
   <section id="coalition" class="bg-l-gray">
     <div class="container mx-auto py-4 xl:py-12">
-      <h2 class="font-semibold text-center text-3xl tracking-wider md:text-2xl xl:text-3xl">{!! $member_title !!}</h2>
-      <div class="flex flex-wrap items-center justify-center px-4">
-        @foreach($gallery as $image)
+      <h2 class="font-semibold text-center text-3xl tracking-wider md:text-2xl xl:text-3xl">Coalition Members</h2>
+      <div class="flex flex-wrap items-center justify-center px-4 md:py-4">
+        @foreach($options_page->options['members'] as $image)
           <div class="w-1/2 p-2 md:w-1/5">
-            <img class="w-full h-auto" src="{!! $image->url!!}" alt="{!! $image->alt !!}" />
+            <img class="w-full h-auto" src="{!! $image['url']!!}" alt="{!! $image['alt'] !!}" />
           </div>
         @endforeach
       </div>

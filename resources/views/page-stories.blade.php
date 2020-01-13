@@ -26,24 +26,28 @@
 
 <section id="story-seach" class="md:my-8 lg:mx-4">
   <div class="container mx-auto px-4 bg-l-gray">
-    <div class="flex items-center">
-      <div class="lg:w-1/4">
-        <div class="w-full py-4 pb-8 flex flex-col md:pb-4 xl:px-4 xl:py-8 xl:pr-8">
+    <div class="flex flex-col md:items-center md:flex-row md:pb-2 lg:pb-6 lg:pt-4">
+      <div class="md:w-1/3 lg:w-1/4">
+        <div class="w-full py-4 flex flex-col md:pb-4 lg:py-0 xl:px-4 xl:pr-8">
           <p class="tracking-wide pb-2">STATE</p>
-          <select class="state-filter border border-l-peach rounded-none bg-white px-4 py-2 appearance-none text-l-peach tracking-wide">
-            <option value="ALL">All States</option>
-            @foreach($get_states as $abbr => $label)
-              <option value="{!! $abbr !!}">{!! $label !!}</option>
-            @endforeach
-          </select>
+          <div class="select-container relative">
+            <select class="w-full state-filter border border-l-peach rounded-none bg-white px-4 py-2 appearance-none text-l-peach tracking-wide cursor-pointer">
+              <option value="ALL">All States</option>
+              @foreach($get_states as $abbr => $label)
+                <option value="{!! $abbr !!}">{!! $label !!}</option>
+              @endforeach
+            </select>
+          </div>
         </div>
       </div>
-      <div class="lg:w-3/4 flex flex-col pl-8 xl:pl-0 xl:pr-4">
+      <div class="md:w-2/3 lg:w-3/4 flex flex-col mb-6 md:mb-0 md:pl-8 xl:pl-0 xl:pr-4">
         <label for="s" class="pb-2">SEARCH</label>
         <div id="search-container" class="relative">
           <form action="/" role="search" method="get" id="searchform">
-            <input type="text" id="s" name="s" value="" class="px-4 py-2 w-full border-l-peach border">
-            <input class="absolute right-0 bottom-0 mb-2 mr-2" type="submit" id="searchsubmit" value="Submit">
+            <input type="text" id="s" name="s" value="" autocomplete="off" class="px-4 pl-12 py-2 w-full border-l-peach border">
+            <button class="absolute left-0 bottom-0 mb-3 ml-3" type="submit" id="searchsubmit">
+              <svg class="h-4 w-4 fill-current text-l-orange" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
+            </button>
           </form>
         </div>
       </div>
@@ -55,7 +59,7 @@
   <div class="container mx-auto p-4 md:pt-0 md:pb-12 xl:px-0">
     <div class="story-box-container grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
       @foreach($current_loop as $box)
-        <a class="story-box col-span-1 relative overflow-hidden" href="{!! $box['link'] !!}">
+        <a class="story-box col-span-1 relative overflow-hidden transform hover:scale-101" href="{!! $box['link'] !!}">
           <img class="story-box-image absolute w-full h-full object-cover object-center z-0" src="{!! $box['image'] !!}" alt="">
           <div class="story-gradient"></div>
           <div class="absolute bottom-0 m-4 text-white z-20">
@@ -67,6 +71,7 @@
           </div>
         </a>
       @endforeach
+      
     </div>
   </div>
 </section>

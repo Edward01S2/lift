@@ -78,7 +78,7 @@ export default {
             
             $.each(data, function(i, story) {
               var str = "";
-              str += '<a class="story-box col-span-1 relative overflow-hidden" href="' + story.link + '">'
+              str += '<a class="story-box col-span-1 relative overflow-hidden transform hover:scale-101" href="' + story.link + '">'
               str += '<img class="story-box-image absolute w-full h-full object-cover object-center z-0" src="' + story.img + '" alt=""></img>'
               str += '<div class="story-gradient"></div>'
               str += '<div class="absolute bottom-0 m-4 text-white z-20">'
@@ -118,6 +118,7 @@ export default {
           success:function(data){
             $('.story-box-container').html(' ');
             $('.story-box-container').append(data)
+            $("#s").val(' ');
           },
           error: function (req, e) {
             console.log(JSON.stringify(req));

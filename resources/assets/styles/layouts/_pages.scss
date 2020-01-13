@@ -1,3 +1,4 @@
+/* purgecss start ignore */
 //Home Page
 #map svg {
   @apply w-full h-auto;
@@ -71,6 +72,9 @@
 #story-subtitle {
   a {
     @apply text-l-blue;
+    &:hover {
+      @apply text-l-orange;
+    }
   }
 }
 
@@ -260,6 +264,13 @@
   }
 }
 
+.agenda-bg {
+  @apply bg-l-blue-100;
+  background-image: url('../images/background-lines.png');
+  background-size: 100%;
+  background-position: top;
+}
+
 .event-bg-image {
   margin-left: -10rem;
   width: calc(100% + 20rem);
@@ -304,15 +315,16 @@
   }
 }
 
-.state-filter { 
-  @apply relative cursor-pointer z-10;
+.select-container { 
+  @apply relative z-10;
   &:before {
-    @apply text-l-peach fill-current;
+    @apply text-l-peach bg-l-peach fill-current stroke-current;
     position: absolute;
-    content: url('../images/cheveron-down.svg');
+    content: '';
+    mask: url('../images/cheveron-down.svg') no-repeat 50% 50%;
     height: 20px;
     width: 20px;
-    top: 18px;
+    top: 14px;
     right: 10px;
     z-index:20;
     pointer-events: none;
@@ -503,3 +515,11 @@
   background-size: 100%;
   background-position: top;
 }
+
+.news-post {
+  @apply transform;
+  &:hover {
+    @apply scale-101;
+  }
+}
+/* purgecss end ignore */

@@ -54,9 +54,11 @@ module.exports = {
       ],
       whitelist: [
         whitelister('resources/assets/styles/components/_forms.scss'),
+        whitelister('resources/assets/styles/layouts/_pages.scss'),
         'current-menu-item',
         'screen-reader-text',
         'product-phone',
+        'contact-box',
 
       ],
       whitelistPatternsChildren: [
@@ -65,7 +67,8 @@ module.exports = {
         /^ginput/,
         /^field/,
         /^ginput_container/,
-        /^nav-primary/
+        /^nav-primary/,
+        /^contact-box/,
       ],
       rejected: true
     })
