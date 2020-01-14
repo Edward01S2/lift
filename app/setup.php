@@ -200,3 +200,45 @@ if (function_exists('add_filter')) {
         return $paths;
     });
   }
+
+add_filter( 'manage_event_posts_columns' , __NAMESPACE__ . '\\cc_event_post_columns' );
+function cc_event_post_columns( $columns ) {
+  unset( $columns['date'] );
+  $columns['event_date'] = 'Date';
+  $columns['start_time'] = 'Start Time';
+  $columns['end_time'] = 'End Time';
+  $columns['date'] = 'Date Published';
+  return $columns;
+}
+
+add_action( 'manage_event_posts_custom_column' , __NAMESPACE__ . '\\cc_event_posts_custom_column', 10, 2 );
+function cc_event_posts_custom_column( $column, $post_id ) {
+  switch ( $column ) {
+    case 'event_date' :
+      echo get_field( 'event_date', $post_id );
+      break;
+    case 'start_time':
+      echo get_field( 'all_day' ) ? 'All Day' : get_field( 'start_time', $post_id );
+      break;
+    case 'end_time':
+      echo get_field( 'all_day' ) ? 'All Day' : get_field( 'end_time', $post_id );
+      break;
+  }
+}
+
+add_filter( 'manage_edit-event_sortable_columns', function ( $columns ) {
+    $columns['event_date'] = 'Date';
+    return $columns;
+  });
+
+add_action( 'pre_get_posts', function ( $query ) {
+if( ! is_admin() || ! $query->is_main_query() ) {
+    return;
+}
+
+if ( 'event_date' === $query->get( 'orderby') ) {
+    $query->set( 'orderby', 'meta_value' );
+    $query->set( 'meta_key', 'event_date' );
+}
+});
+  
