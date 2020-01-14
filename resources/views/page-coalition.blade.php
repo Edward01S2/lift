@@ -42,16 +42,13 @@
 
 <section id="coalition" class="bg-l-gray">
   <div class="container mx-auto py-4 xl:py-12">
-    <h2 class="font-semibold text-center text-3xl tracking-wider md:text-2xl xl:text-3xl">{!! $members_title !!}</h2>
+    <h2 class="font-semibold text-center text-3xl tracking-wider md:text-2xl xl:text-3xl">Coalition Members</h2>
     <div class="flex flex-wrap items-center justify-center px-4 md:py-4">
-      @foreach($members as $image)
+      @foreach($options_page->options['members'] as $image)
         <div class="w-1/2 p-2 md:w-1/5">
-          <img class="w-full h-auto" src="{!! $image->url!!}" alt="{!! $image->alt !!}" />
+          <img class="w-full h-auto" src="{!! $image['url']!!}" alt="{!! $image['alt'] !!}" />
         </div>
       @endforeach
-    </div>
-    <div class="text-center py-4">
-      <a href="{!! $members_button->url !!}" class="bg-l-blue text-white px-6 py-2 uppercase text-sm font-semibold tracking-wider md:text-base hover:bg-l-orange xl:py-4">{!! $members_button->title !!}</a>
     </div>
   </div>
 </section>

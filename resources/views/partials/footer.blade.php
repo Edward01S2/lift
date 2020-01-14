@@ -6,7 +6,7 @@
       </a>
       <div class="social-links flex mb-4 md:mb-2">
         @foreach($options_page->options['networks'] as $social)
-          <a href="" class="group relative text-white fill-current flex items-center justify-center px-1 cursor-pointer md:px-2">
+          <a href="" class="group relative text-white fill-current flex items-center justify-center px-1 cursor-pointer hover:text-white md:px-2">
             <span class="relative z-10 h-10 w-10 rounded-full transform group-hover:scale-105" style="background-color: {!! $social['bg_color'] !!}"></span>
             <i class="absolute z-20 {!! $social['icon'] !!} fa-lg"></i>
           </a>

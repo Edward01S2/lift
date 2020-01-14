@@ -9,7 +9,7 @@
         <h1 class="text-2xl text-left font-semibold leading-tight border-l-4 pl-4 py-2 border-l-orange tracking-wider lg:text-4xl xl:text-5xl xl:border-l-8">{!! $line_1 !!}</h1>
         <div class="flex flex-col pt-4 md:flex-row md:items-center lg:pl-3 xl:pl-4">
           <div><a href="{!! $hero_button->url !!}" class="uppercase py-2 px-6 text-black hover:text-l-orange inline-block text-center font-semibold tracking-wide md:text-sm md:px-4 xl:text-base">{!! $hero_button->title !!}</a></div>
-          <div class="pt-2 md:pt-0"><a href="{!! $hero_button_2->url !!}" class="uppercase py-2 px-10 bg-l-blue text-white font-semibold hover:bg-l-orange inline-block text-center ml-6 md:text-sm md:px-6 xl:text-base">{!! $hero_button_2->title !!}</a></div>
+          <div class="pt-2 md:pt-0"><a href="{!! $hero_button_2->url !!}" class="uppercase py-2 px-10 bg-l-blue text-white font-semibold hover:bg-l-orange hover:text-white inline-block text-center ml-6 md:text-sm md:px-6 xl:text-base">{!! $hero_button_2->title !!}</a></div>
         </div>
       </div>
     </div>
