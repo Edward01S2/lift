@@ -69,6 +69,7 @@ module.exports = {
         /^ginput_container/,
         /^nav-primary/,
         /^contact-box/,
+        /^map/,
       ],
       rejected: true
     })
