@@ -70,6 +70,7 @@ module.exports = {
         /^nav-primary/,
         /^contact-box/,
         /^map/,
+        /^lity/,
       ],
       rejected: true
     })

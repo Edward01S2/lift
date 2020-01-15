@@ -49,7 +49,7 @@
         <h3 class="text-3xl text-center text-white font-semibold tracking-wide py-8">Photo Gallery</h3>
         <div class="gallery-container grid grid-cols-2 gap-4 px-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:px-0">
         @foreach($gallery as $image)
-          <a class="relative overflow-hidden" href="{!! $image->url !!}" style="padding-bottom:100%;">
+          <a class="relative overflow-hidden transform hover:scale-101" href="{!! $image->url !!}" style="padding-bottom:100%;">
             <img class="absolute w-full h-full object-cover object-center z-0" src="{!!$image->url !!}" alt="" data-lity>
           </a>
         @endforeach
