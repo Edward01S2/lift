@@ -50,13 +50,17 @@ export default {
               str += '</article>'
 
               $('.event-container').append(str);
+
+              if(Object.keys(data).length < 6) {
+                $(".event-btn-container").hide();
+              }
             //console.log(data);
             })
           }
-          //console.log(Object.keys(data).length);
-          if(Object.keys(data).length < 6) {
+          else {
             $(".event-btn-container").hide();
           }
+          //console.log(Object.keys(data).length);
         },
         error: function (req, e) {
           console.log(JSON.stringify(req));

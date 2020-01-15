@@ -7,6 +7,17 @@
 .footer-nav {
   .nav-primary {
     @apply text-center;
+    .caret-down {
+      &:before {
+        @apply hidden;
+        content: none;
+      }
+    }
+    .menu-item-has-children {
+      a {
+        @apply w-full;
+      }
+    }
   }
   .sub-menu {
     @apply hidden;
