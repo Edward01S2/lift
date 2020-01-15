@@ -9,9 +9,9 @@
 
   <div class="contact-boxes">
     <div class="container mx-auto md:-mt-8 lg:-mt-12 lg:px-8">
-      <div class="flex flex-col bg-l-orange items-center py-4 md:flex-row md:items-start md:px-4 lg:px-8 xl:mx-16 xl:px-12">
+      <div class="flex flex-col bg-l-orange items-center py-4 md:items-center md:px-4 md:flex-wrap lg:px-8 xl:mx-16 xl:px-12">
         @foreach($boxes as $box)
-          <div class="w-3/5 md:w-1/3">
+          <div class="">
             <div class="contact-box text-white text-center py-4 text-lg md:py-2 md:text-base lg:text-lg">
               {!!$box->box!!}
             </div>
