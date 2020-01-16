@@ -1,5 +1,5 @@
 .nav-primary {
-  @apply flex flex-col text-left pb-6;
+  @apply flex flex-col text-left pb-6 bg-white;
   // & li:last-child {
   //   @apply pb-6;
   // }
@@ -30,7 +30,7 @@
   .menu-item-has-children {
     @apply relative z-10 cursor-pointer;
     a {
-      @apply w-1/2;
+      @apply w-2/3;
     }
 
   }
@@ -76,13 +76,19 @@
 
 @screen md {
   .nav-primary {
-    @apply py-6;
+    @apply py-6 px-4 w-full;
+    .menu-item-has-children {
+      @apply relative pr-8;
+      a {
+        @apply w-full;
+      }
+    }
   }
 }
 
 @screen lg {
   .nav-primary {
-    @apply flex flex-row items-center py-0;
+    @apply flex flex-row items-center py-0 px-0;
     .sub-menu {
       @apply hidden;
     }
@@ -90,7 +96,7 @@
       @apply py-4;
     }
     .menu-item-has-children {
-      @apply relative;
+      @apply relative px-0;
       a {
         @apply w-full;
       }

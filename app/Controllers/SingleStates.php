@@ -10,13 +10,9 @@ class SingleStates extends Controller
 
   public function getNews() {
    
-    $state = get_field('state');
-
-
     $tag_args = get_posts([
       'posts_per_page'=> 3,
       'post_type' => 'post',
-      'tag' => $state['value'],
   ]);
 
     return array_map(function ($post) {
@@ -35,7 +31,7 @@ class SingleStates extends Controller
     $state = get_field('state');
 
     $posts = get_posts( array(
-        'numberposts'   => 10,
+        'numberposts'   => 1,
         //Here we can get more than one post type. Useful to a home page.
         'post_type'     => 'story',
         'meta_key'  => 'state',
@@ -46,11 +42,29 @@ class SingleStates extends Controller
     if ( empty( $posts ) ) {
         return null;
     }
-
-
     //Format website link
     
-    return array_map(function ($post) {
+    return array_map(function ($post) { 
+      $state = get_field('state', $post->ID);
+      $args = array(
+          'numberposts' => 9,
+          'post_type'     => 'story',
+          'meta_key'  => 'state',
+          'meta_value' => $state['value'],
+          'post__not_in' => array( $post->ID )
+      );
+      $subpost = get_posts($args);
+      $stories = array();
+      $index = 0;
+      foreach($subpost as $sub) {
+        
+        $stories[$index]['id'] = $sub->ID;
+        $stories[$index]['company'] = get_field('company', $sub->ID);
+        $stories[$index]['img'] = get_the_post_thumbnail_url($sub->ID);
+        $stories[$index]['link'] = get_permalink($sub->ID);
+        $index ++;
+      }
+
       return [
         'name' => get_the_title($post->ID),
         'image' => get_the_post_thumbnail_url($post->ID),
@@ -61,6 +75,7 @@ class SingleStates extends Controller
         'location' => get_field('location', $post->ID),
         'website' => get_field('website', $post->ID),
         'state' => get_field('state', $post->ID),
+        'stories' => $stories,
 
       ];
     }, $posts);  

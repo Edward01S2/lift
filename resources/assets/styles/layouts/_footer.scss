@@ -34,6 +34,9 @@
   .footer-nav {
     .nav-primary {
       @apply flex-row items-center py-4;
+      .menu-item-has-children {
+        @apply pr-0;
+      }
     }
   }
 }

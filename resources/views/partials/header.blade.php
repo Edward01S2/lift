@@ -11,10 +11,10 @@
           <svg id="menu-btn" class="fill-current text-l-blue h-8 w-8" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
         </button>
       </div>
-      <div id="main-nav" class="w-full hidden shadow lg:shadow-none lg:flex lg:items-end lg:w-auto lg:pr-4 xl:pr-0">
-        <div class="text-sm relative w-full md:w-auto">
-          <div class="absolute w-full text-center mt-2 md:static md:w-auto md:mt-0">
-            <div class="h-full w-full absolute bg-white z-10 shadow md:static md:bg-none md:w-auto"></div>
+      <div id="main-nav" class="w-full hidden md:shadow-none lg:shadow-none lg:flex lg:items-end lg:w-auto lg:pr-4 xl:pr-0">
+        <div class="text-sm relative w-full">
+          <div class="absolute w-full text-center mt-2 md:ml-auto md:bg-white md:right-0 md:shadow md:border-l-4 md:border-l-orange md:mt-4 md:w-1/3 md:mt-0 lg:border-0 lg:static lg:shadow-none lg:m-0 lg:w-full">
+            {{-- <div class="h-full w-full absolute bg-white z-10 shadow md:static md:bg-none md:w-1/2"></div> --}}
               <div class="z-10 relative flex flex-col md:flex-row">
               @if (has_nav_menu('primary_navigation'))
                 {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav-primary']) !!}

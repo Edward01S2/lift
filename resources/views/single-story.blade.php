@@ -3,25 +3,50 @@
 @section('content')
 @while(have_posts()) @php the_post() @endphp
 
-  <section id="story-hero">
-    <div class="relative">
-      <div class="single-story__vid-container relative w-full h-full z-20 flex flex-col justify-center items-center opacity-99" style="background-image:url({!! $hero_image->url !!}); background-size: cover;">
-        <div class="text-white z-30 text-center py-8 lg:pt-16 xl:pt-32">
-          <img class="h-8 w-auto mx-auto mb-4 lg:h-10" src="{{ $options_page->options['logo_alt']['url'] }}" alt="">
-          <h2 class="text-4xl font-semibold leading-none px-8 mb-4 md:px-24 lg:text-5xl lg:px-48">{!! App::title() !!}</h2>
-          <p class="text-xl font-medium px-12 xl:text-3xl">{!! $company !!}, {!! $location !!}, {!! $state->value !!}</p>
-        </div>
-        
-        <div class="play-container text-center z-30 pb-8 xl:pb-24">
-          @if($video)
-          <a href="{!! $video !!}" data-lity id="toggle-video" class="cursor-pointer outline-none focus:outline-none bg-l-orange inline-block rounded-full group hover:bg-white">
-            <svg class="fill-current text-white h-16 w-16 p-2 pl-3 block cursor-pointer outline-none hover:text-white group-hover:text-l-orange lg:h-20 lg:w-20 xl:h-24 xl:w-24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+<section id="single-story__container">
+  <div class="container mx-auto lg:pt-8 xl:pt-16">
+    <div class="single-story__vid-container relative w-full h-full z-20 flex flex-col justify-center items-center lg:w-1/2 lg:float-right lg:pl-4 lg:pb-4 xl:ml-8 xl:mb-4" style="background-image:url({!! $hero_image->url !!}); background-size: cover;">
+      <div class="play-container text-center py-20 z-30 md:py-24 lg:py-28 xl:py-32">
+        @if($video)
+        <a href="{!! $video !!}" data-lity id="toggle-video" class="cursor-pointer outline-none focus:outline-none bg-l-orange inline-block rounded-full group hover:bg-white">
+          <svg class="fill-current text-white h-16 w-16 p-2 pl-3 block cursor-pointer outline-none hover:text-white group-hover:text-l-orange md:h-20 md:w-20 xl:h-24 xl:w-24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+        </a>
+        @else
+        <div class="h-16 md:h-20 xl:h-24"></div>
+        @endif
+      </div>
+    </div>
+  
+
+  
+
+  <div class="single-story__columns z-30 px-4 py-6 lg:pt-0 xl:p-0">
+    <div class="pb-8">
+      <h2 class="text-3xl font-semibold leading-none mb-2 lg:text-4xl">{!! App::title() !!}</h2>
+      <p class="text-lg font-medium pr-8 xl:text-2xl">{!! $company !!}, {!! $location !!}, {!! $state->value !!}</p>
+    </div>
+    <div class="single-story__main-content">
+      @php the_content() @endphp
+    </div>
+  </div>
+
+  @if($gallery)
+    <div id="single-story__gallery" class="pb-4 xl:mt-12">
+      <div class="container mx-auto">
+        <div class="gallery-container grid grid-cols-2 gap-4 px-4 md:grid-cols-4 xl:grid-cols-5 xl:px-0">
+        @foreach($gallery as $image)
+          <a class="relative overflow-hidden transform hover:scale-101" href="{!! $image->url !!}" style="padding-bottom:100%;">
+            <img class="absolute w-full h-full object-cover object-center z-0" src="{!!$image->url !!}" alt="" data-lity>
           </a>
-          @endif
+        @endforeach
         </div>
       </div>
     </div>
-  </section>
+  @endif
+  </div>
+</section>
+
+  {{-- <section id="story-hero">
 
   <section id="single-story__content">
     <div class="container mx-auto">
@@ -74,7 +99,7 @@
     </div>
 
   </section>
-  
+   --}}
 @endwhile
 
 @endsection

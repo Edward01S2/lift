@@ -69,7 +69,7 @@
 
   <section id="state-news" class="bg-l-gray py-8">
     <div class="container mx-auto">
-      <h2 class="text-center pb-8 text-2xl font-semibold xl:text-3xl">LIFT News in {!! App::title() !!}</h2>
+      <h2 class="text-center pb-8 text-2xl font-semibold xl:text-3xl">LIFT News</h2>
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:mx-4 xl:mx-0">
         @foreach($get_news as $post)
         <a class="group news-post" href="{!! $post['link'] !!}">
@@ -95,28 +95,32 @@
       <h2 class="text-center font-semibold px-4 text-2xl leading-tight pb-4 md:px-40 md:pb-8 xl:text-3xl">Digitally Empowered Small Businesses in {!! $state->label !!}</h2>
       <div class="flex flex-col md:flex-row md:px-4 xl:px-0">
         <div class="md:w-1/2">
-          <a class="relative block w-full h-full transform hover:scale-101" href="{!! $get_state[0]['link'] !!}">
+          <div class="relative block w-full h-full">
             <div class="h-68 lg:h-72 xl:h-78">
               <div class="story-gradient"></div>
               <img class="w-full h-full object-cover object-center z-20" src="{!! $get_state[0]['image'] !!}" alt="">
               <p class="absolute bottom-0 left-0 text-white z-30 mx-2 mb-2 text-lg font-semibold xl:text-xl">{!! $get_state[0]['company'] !!}</p>
             </div>
+          </div>
+        </div>
+        
+        <div id="sub-stories" class="md:w-1/2 grid grid-cols-2 gap-4 mt-4 mx-4 grid-rows-3 md:mt-0 md:grid-cols-3 md:mx-0 md:pl-4 lg:h-72 xl:h-78">
+        @foreach($get_state[0]['stories'] as $state)
+          <a class="relative block w-full h-40 md:h-full lg:h-full transform hover:scale-101" href="{!! $state['link'] !!}" data-id="{!! $state['id'] !!}">
+            <div class="story-gradient z-40"></div>
+            <img class="w-full h-full absolute object-cover object-center z-20" src="{!! $state['img'] !!}" alt="">
+            <p class="text-white absolute bottom-0 left-0 z-30 text-sm leading-tight mx-1 mb-1 font-semibold lg:text-sm xl:text-base xl:mx-2 xl:mb-2">{!! $state['company'] !!}</p>
           </a>
+        @endforeach
         </div>
-        <div class="md:w-1/2 grid grid-cols-2 gap-4 mt-4 mx-4 grid-rows-3 md:mt-0 md:grid-cols-3 md:mx-0 md:pl-4 lg:h-72 xl:h-78">
-          @foreach($get_state as $state)
-            @if($loop->index > 0)
-              <a class="relative block w-full h-40 md:h-full lg:h-full transform hover:scale-101" href="{!! $state['link'] !!}">
-                <div class="story-gradient z-40"></div>
-                <img class="w-full h-full absolute object-cover object-center z-20" src="{!! $state['image'] !!}" alt="">
-                <p class="text-white absolute bottom-0 left-0 z-30 text-sm leading-tight mx-1 mb-1 font-semibold lg:text-sm xl:text-base xl:mx-2 xl:mb-2">{!! $state['company'] !!}</p>
-              </a>
-            @endif
-          @endforeach
-        </div>
+        
       </div>
       <div class="hidden md:flex pt-4">
+        @if($get_state[0]['gallery'])
         <div class="md:w-1/2 pl-4 md:pl-4 xl:pl-0">
+        @else
+        <div class="pl-4 md:pl-4 xl:pl-0">
+        @endif
           <h3 class="text-2xl leading-tight font-semibold pb-2 xl:text-3xl">{!! $get_state[0]['name'] !!}</h3>
           <p class="text-sm xl:text-base">{!! $get_state[0]['company'] !!}, {!! $get_state[0]['location'] !!}, {!! $get_state[0]['state']['value'] !!}</p>
           <a class="text-l-gray-dark underline hover:text-l-orange text-sm xl:text-base" href="{!! $get_state[0]['website'] !!}">Website</a>
@@ -124,6 +128,7 @@
             {!! $get_state[0]['content'] !!}
           </div>
         </div>
+        @if($get_state[0]['gallery'])
         <div class="md:w-1/2">
           <div class="grid grid-cols-2 gap-4 px-4">
             @foreach($get_state[0]['gallery'] as $img)
@@ -135,6 +140,7 @@
             @endforeach
           </div>
         </div>
+        @endif
       </div>
     </div>
   </section>
@@ -155,5 +161,6 @@
   </div>
 
   @endwhile
-  
+  {{-- @debug
+  @dump($get_state) --}}
 @endsection

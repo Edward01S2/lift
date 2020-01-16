@@ -384,3 +384,34 @@ function my_theme_doctors_menu_filter( $items, $menu, $args ) {
 }
 
 add_filter( 'wp_get_nav_menu_items', __NAMESPACE__ . '\\my_theme_doctors_menu_filter', 10, 3 );
+
+function get_story(){
+
+  $id = isset($_POST['post_id']) ? $_POST['post_id'] : 0;
+
+  $args = array(
+    'p' => $id,
+  );
+  
+  //echo $search;
+  $wp_query = new \WP_Query();
+  $wp_query->parse_query($args);
+  relevanssi_do_query($wp_query);
+
+  // echo $wp_query;
+
+  if( $wp_query->have_posts() ) {
+    while( $wp_query->have_posts() ) : $wp_query->the_post();
+
+    echo \App\template(locate_template('views/partials/content-state'));
+    /* end loop */
+    endwhile;
+  } 
+  wp_reset_query();
+  
+  die();
+  
+}
+
+add_action('wp_ajax_get_story', __NAMESPACE__ . '\\get_story');
+add_action('wp_ajax_nopriv_get_story', __NAMESPACE__ . '\\get_story');

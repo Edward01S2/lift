@@ -21,6 +21,7 @@ import singleStory from './routes/singleStory';
 import blog from './routes/blog';
 import stories from './routes/stories';
 import liftInAction from './routes/liftInAction';
+import singleStates from './routes/singleStates';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -35,6 +36,7 @@ const routes = new Router({
   singleStory,
   blog,
   liftInAction,
+  singleStates,
 });
 
 // Load Events
