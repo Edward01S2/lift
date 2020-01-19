@@ -171,6 +171,6 @@
   </div>
 
   @endwhile
-  @debug
-  @dump($get_state)
+  {{-- @debug
+  @dump($get_state) --}}
 @endsection

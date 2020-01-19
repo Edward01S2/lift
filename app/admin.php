@@ -24,3 +24,40 @@ add_action('customize_preview_init', function () {
 });
 
 add_theme_support( 'post-formats', array( 'link' ) );
+
+add_filter('manage_story_posts_columns', function ($columns) {
+    $columns = array(
+        'cb'    => '&lt;input type="checkbox" />',
+        'title'     => 'Title',
+        'state'  => 'State',
+        'date'        =>    'Date',
+    );
+    return $columns;
+});
+
+add_action('manage_posts_custom_column', function($column) {
+    global $post;
+    switch ($column) {
+        case 'state':
+            echo get_field( "state", $post->ID )['label'];
+            break;
+        default:
+            break;
+    }
+}, 10, 2);
+
+add_filter( 'manage_edit-story_sortable_columns', function ( $columns ) {
+  $columns['state'] = 'state';
+  return $columns;
+});
+
+add_action( 'pre_get_posts', function ( $query ) {
+  if( ! is_admin() || ! $query->is_main_query() ) {
+    return;
+  }
+
+  if ( 'state' === $query->get( 'orderby') ) {
+    $query->set( 'orderby', 'meta_value' );
+    $query->set( 'meta_key', 'state' );
+  }
+});

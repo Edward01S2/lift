@@ -21,8 +21,12 @@ export default {
                   str +='<a class="transform hover:scale-101" href="' + story.link + '">';
                   str +='<img src="' + story.img + '"/>';
                   str +='</a>';
+                  console.log(data.length);
                   if(data.length > 2) {
                     $('.story-btn').addClass('md:-mt-10 lg:-mt-12');
+                  }
+                  else {
+                    $('.story-btn').removeClass('md:-mt-10 lg:-mt-12');
                   }
                 }
                 else {
@@ -34,7 +38,7 @@ export default {
               $('#story-subtitle').html('Stories from <a class="hover:text-l-orange" href="/stories/?state=' + state + '">' + stateLongName[state] + '</a>');
             }
             else {
-              $('#story-subtitle').html('Share your story from <a href="#">' + stateLongName[state] + '</a>');
+              $('#story-subtitle').html('Share your story from <a href="/contact">' + stateLongName[state] + '</a>');
               $('.story-btn').removeClass('md:-mt-10 lg:-mt-12');
               $('#story-container').html("");
             }
@@ -75,6 +79,9 @@ export default {
             str +='</a>';
             if(data.length > 2) {
               $('.story-btn').addClass('md:-mt-10 lg:-mt-12');
+            }
+            else {
+              $('.story-btn').removeClass('md:-mt-10 lg:-mt-12');
             }
           }
           else {
