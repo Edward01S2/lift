@@ -11,7 +11,11 @@
       <div class="new-container grid grid-cols-1 gap-4 pb-8 lg:grid-cols-2 lg:px-4 lg:pt-4 xl:px-0">
         @foreach($current_loop as $post)
           @if ($loop->index < 2)
-          <a class="group news-post" href="{!! $post['link'] !!}">
+          @if ($post['external'])
+            <a class="group news-post" target="_blank" href="{!! $post['external'] !!}">
+          @else
+            <a class="group news-post" href="{!! $post['link'] !!}">
+          @endif
             <div class="flex flex-col">
               <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
                 <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">
@@ -25,7 +29,11 @@
           </div>
           </a>
           @else
-          <a class="group news-post" href="{!! $post['link'] !!}">
+          @if ($post['external'])
+            <a class="group news-post" target="_blank" href="{!! $post['external'] !!}">
+          @else
+            <a class="group news-post" href="{!! $post['link'] !!}">
+          @endif
             <div class="flex">
               <div class="relative hidden md:block md:w-1/3 lg:w-1/2">
                 <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">

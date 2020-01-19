@@ -277,12 +277,14 @@ function post_endpoint ( $data ) {
     $link = get_post_permalink();
     $content = wp_trim_words(get_post_field('post_content'), $trim, '...');
     $date = get_the_date('F d, Y');
+    $external = get_field('external_link');
 
     $val[$index]['img'] = $img;
     $val[$index]['link'] = $link;
     $val[$index]['name'] = $name;  
     $val[$index]['content'] = $content;
     $val[$index]['date'] = $date;  
+    $val[$index]['external'] = $external;  
     $index ++;
   // }
   // return $val;

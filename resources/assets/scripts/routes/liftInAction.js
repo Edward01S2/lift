@@ -12,8 +12,13 @@ export default {
           //console.log(data);
           if(data !== null ) {
             $.each(data, function(i, post) {
-            
-            var str = '<a class="group news-post md:col-span-4 lg:col-span-2" href="' + post.link + '">'
+
+            if(post.external !== null) {
+              var str = '<a class="group news-post md:col-span-4 lg:col-span-2" target="_blank" href="' + post.external + '">'
+            }
+            else {
+              var str = '<a class="group news-post md:col-span-4 lg:col-span-2" href="' + post.link + '">'
+            }
             str += '<div class="flex flex-col">'
             str += '<div class="h-48 relative md:h-56 lg:h-64 xl:h-72">'
             str += '<img class="h-full w-full object-cover object-center absolute" src="' + post.img + '" alt="">'

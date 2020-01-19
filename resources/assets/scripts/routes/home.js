@@ -21,7 +21,9 @@ export default {
                   str +='<a class="transform hover:scale-101" href="' + story.link + '">';
                   str +='<img src="' + story.img + '"/>';
                   str +='</a>';
-                  $('.story-btn').addClass('md:-mt-10 lg:-mt-12');
+                  if(data.length > 2) {
+                    $('.story-btn').addClass('md:-mt-10 lg:-mt-12');
+                  }
                 }
                 else {
                   $('.story-btn').removeClass('md:-mt-10 lg:-mt-12');
@@ -71,7 +73,9 @@ export default {
             str +='<a class="transform hover:scale-101" href="' + story.link + '">';
             str +='<img src="' + story.img + '"/>';
             str +='</a>';
-            $('.story-btn').addClass('md:-mt-10 lg:-mt-12');
+            if(data.length > 2) {
+              $('.story-btn').addClass('md:-mt-10 lg:-mt-12');
+            }
           }
           else {
             $('.story-btn').removeClass('md:-mt-10 lg:-mt-12');

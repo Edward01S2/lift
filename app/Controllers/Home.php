@@ -44,12 +44,14 @@ class Home extends Controller
         $link =  get_permalink();
         $content = wp_trim_words(get_post_field('post_content'), 35, '...');
         $date = get_the_date();
+        $external = get_field('external_link');
 
         $val[$index]['name'] = $name;
         $val[$index]['image'] = $image;
         $val[$index]['link'] = $link; 
         $val[$index]['content'] = $content;
         $val[$index]['date'] = $date;
+        $val[$index]['external'] = $external;
       
       
     endwhile;

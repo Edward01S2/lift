@@ -41,7 +41,7 @@
               </div>
             </div>
             <div id="story-container" class="px-2 pl-0"></div>
-            <div class="story-btn p-4 md:p-0">
+            <div class="story-btn p-4 md:p-0 md:mt-2">
               <a href="{!! $story_button->url !!}" class="uppercase py-2 px-10 bg-l-blue text-white font-semibold relative z-50 hover:bg-l-orange hover:text-white inline-block text-center tracking-wide md:text-sm md:px-4 lg:text-base lg:px-6 lg:mt-1 xl:text-lg xl:mt-0 xl:px-8">{!! $story_button->title !!}</a>
             </div>
           </div>

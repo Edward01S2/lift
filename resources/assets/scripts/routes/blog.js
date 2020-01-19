@@ -30,11 +30,15 @@ export default {
         url: url,
         type: 'GET',
         success : function(data) {
-          //console.log(data);
+          console.log(data);
           if(data !== null ) {
             $.each(data, function(i, post) {
-
-            var str = '<a class="group news-post" href="' + post.link + '">'
+            if(post.external !== null) {
+              var str = '<a class="group news-post" target="_blank" href="' + post.external + '">'
+            }
+            else {
+              var str = '<a class="group news-post" href="' + post.link + '">'
+            }
             str += '<div class="flex">'
             str += '<div class="relative hidden md:block md:w-1/3 lg:w-1/2">'
             str +=  '<img class="h-full w-full object-cover object-center absolute" src="' + post.img + '" alt="">'

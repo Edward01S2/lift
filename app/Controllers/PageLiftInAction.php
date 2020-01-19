@@ -21,7 +21,8 @@ class PageLiftInAction extends Controller
           'image' => get_the_post_thumbnail_url($post->ID),
           'link' =>  get_permalink($post->ID),
           'content' => wp_trim_words(get_post_field('post_content', $post->ID), 35, '...'),
-          'date' => get_the_date('F j, Y', $post->ID)
+          'date' => get_the_date('F j, Y', $post->ID),
+          'external' => get_field('external_link', $post->ID),
       ];
   }, $args);
     

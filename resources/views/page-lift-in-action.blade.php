@@ -10,7 +10,11 @@
     <div class="new-container grid grid-cols-1 gap-4 pb-8 md:grid-cols-8 lg:px-4 lg:pt-4 xl:px-0">
       @foreach($current_loop as $post)
         @if ($loop->index < 1)
-        <a class="group news-post md:col-span-4 transform hover:scale-101" href="{!! $post['link'] !!}">
+        @if ($post['external'])
+          <a class="group news-post md:col-span-4 transform hover:scale-101" target="_blank" href="{!! $post['external'] !!}">
+        @else
+          <a class="group news-post md:col-span-4 transform hover:scale-101" href="{!! $post['link'] !!}">
+        @endif
           <div class="flex flex-col">
             <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
               <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">
@@ -24,7 +28,11 @@
         </div>
         </a>
         @elseif($loop->index < 3)
-        <a class="group news-post md:col-span-4 lg:col-span-2 transform hover:scale-101" href="{!! $post['link'] !!}">
+        @if ($post['external'])
+          <a class="group news-post md:col-span-4 lg:col-span-2 transform hover:scale-101" target="_blank" href="{!! $post['external'] !!}">
+        @else
+          <a class="group news-post md:col-span-4 lg:col-span-2 transform hover:scale-101" href="{!! $post['link'] !!}">
+        @endif
           <div class="flex flex-col">
             <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
               <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">
@@ -38,7 +46,11 @@
           </div>
         </a>
         @elseif($loop->index < 5)
-        <a class="group news-post md:col-span-4 lg:-mt-16 lg:col-span-2 transform hover:scale-101" href="{!! $post['link'] !!}">
+        @if ($post['external'])
+          <a class="group news-post md:col-span-4 lg:-mt-16 lg:col-span-2 transform hover:scale-101" target="_blank" href="{!! $post['external'] !!}">
+        @else
+          <a class="group news-post md:col-span-4 lg:-mt-16 lg:col-span-2 transform hover:scale-101" href="{!! $post['link'] !!}">
+        @endif
           <div class="flex flex-col">
             <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
               <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">
@@ -52,7 +64,11 @@
           </div>
         </a>
         @elseif($loop->index < 6)
-          <a class="group news-post md:col-span-4 transform hover:scale-101" href="{!! $post['link'] !!}">
+          @if ($post['external'])
+            <a class="group news-post md:col-span-4 transform hover:scale-101" target="_blank" href="{!! $post['external'] !!}">
+          @else
+            <a class="group news-post md:col-span-4 transform hover:scale-101" href="{!! $post['link'] !!}">
+          @endif
             <div class="flex flex-col">
               <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
                 <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">
@@ -66,7 +82,11 @@
           </div>
           </a>
         @else
-        <a class="group news-post md:col-span-4 lg:col-span-2 transform hover:scale-101" href="{!! $post['link'] !!}">
+        @if ($post['external'])
+          <a class="group news-post md:col-span-4 lg:col-span-2 transform hover:scale-101" target="_blank" href="{!! $post['external'] !!}">
+        @else
+          <a class="group news-post md:col-span-4 lg:col-span-2 transform hover:scale-101" href="{!! $post['link'] !!}">
+        @endif
           <div class="flex flex-col">
             <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
               <img class="h-full w-full object-cover object-center absolute" src="{!! $post['image'] !!}" alt="">

@@ -16,9 +16,13 @@
       <div class="relative md:w-1/2">
         <div class="content-container relative w-full h-full z-20 flex flex-col justify-center items-center opacity-99" style="background-image:url({!! $video_poster->url !!}); background-size: cover;">
           <div class="play-container text-center z-30 py-16 md:py-20 lg:py-24 xl:py-48">
+            @if($video_url)
             <a href="{!! $video_url !!}" data-lity id="toggle-video" class="cursor-pointer outline-none focus:outline-none bg-l-orange inline-block rounded-full group hover:bg-white">
               <svg class="fill-current text-white h-16 w-16 p-2 pl-3 block cursor-pointer outline-none hover:text-white group-hover:text-l-orange lg:h-20 lg:w-20 xl:h-24 xl:w-24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
             </a>
+            @else
+            <div class="h-16 md:h-20 xl:h-24"></div>
+            @endif
           </div>
         </div>
       </div>
@@ -94,7 +98,11 @@
     <div class="container mx-auto py-4 md:py-8">
       <h2 class="text-center font-semibold px-4 text-2xl leading-tight pb-4 md:px-40 md:pb-8 xl:text-3xl">Digitally Empowered Small Businesses in {!! $state->label !!}</h2>
       <div class="flex flex-col md:flex-row md:px-4 xl:px-0">
-        <div class="md:w-1/2">
+        @if(count($get_state) > 1)
+          <div class="md:w-1/2">
+        @else
+          <div class="md:w-full">
+        @endif
           <div class="relative block w-full h-full">
             <div class="h-68 lg:h-72 xl:h-78">
               <div class="story-gradient"></div>
@@ -104,6 +112,7 @@
           </div>
         </div>
         
+        @if(count($get_state) > 1)
         <div id="sub-stories" class="md:w-1/2 grid grid-cols-2 gap-4 mt-4 mx-4 grid-rows-3 md:mt-0 md:grid-cols-3 md:mx-0 md:pl-4 lg:h-72 xl:h-78">
         @foreach($get_state[0]['stories'] as $state)
           <a class="relative block w-full h-40 md:h-full lg:h-full transform hover:scale-101" href="{!! $state['link'] !!}" data-id="{!! $state['id'] !!}">
@@ -113,6 +122,7 @@
           </a>
         @endforeach
         </div>
+        @endif
         
       </div>
       <div class="hidden md:flex pt-4">
@@ -161,6 +171,6 @@
   </div>
 
   @endwhile
-  {{-- @debug
-  @dump($get_state) --}}
+  @debug
+  @dump($get_state)
 @endsection
