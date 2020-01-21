@@ -131,6 +131,10 @@ input[type='checkbox'] {
 }
 
 //GFORM#2
+#gform_confirmation_wrapper_2 {
+  @apply px-4;
+}
+
 @screen md {
   #gform_wrapper_2 {
     @apply -mx-2 relative;
