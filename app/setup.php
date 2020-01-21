@@ -246,7 +246,7 @@ if ( 'event_date' === $query->get( 'orderby') ) {
 add_action( 'gform_pre_submission_4', 'pre_submission_handler' );
 function pre_submission_handler( $form ) {
     $_POST['input_13'] = wp_generate_password();
-    $_POST['input_12'] = 'Memberships -> 3C';
+    $_POST['input_12'] = 'Membership -> 3C';
 }
 
 add_action( 'gform_pre_submission_2', 'pre_submission_handler_2' );
