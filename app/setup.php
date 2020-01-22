@@ -250,10 +250,10 @@ add_action( 'gform_pre_submission_4', function($form) {
 
 add_action( 'gform_pre_submission_2', function($form) {
     // $_POST['input_17'] = wp_generate_password();
-    $_POST['input_5'] = 'Form -> Join LIFT';
+    $_POST['input_5'] = 'Coalition Member';
 });
 
 add_action( 'gform_pre_submission_1', function($form) {
     // $_POST['input_17'] = wp_generate_password();
-    $_POST['input_5'] = 'Form -> LIFT Sub';
+    $_POST['input_5'] = 'LIFT Subscribe';
 });
