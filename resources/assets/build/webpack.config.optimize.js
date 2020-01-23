@@ -71,6 +71,7 @@ module.exports = {
         /^contact-box/,
         /^map/,
         /^lity/,
+        /^validation/,
       ],
       rejected: true
     })

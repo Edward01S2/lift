@@ -37,6 +37,19 @@
   @apply hidden;
 }
 
+.gform_ajax_spinner {
+  @apply hidden;
+}
+
+.gfield_error {
+  .validation_message {
+    @apply hidden;
+  }
+  input {
+    @apply border-2 border-red-500 box-border;
+  }
+}
+
 .ginput_container_select {
   @apply relative z-10 cursor-pointer;
   &:before {
@@ -90,7 +103,7 @@ input[type='checkbox'] {
 @screen md {
   #gform_wrapper_1 {
     #gform_1 {
-      @apply flex;
+      @apply flex relative;
     }
     .gfield {
       @apply mr-4 mb-0 w-1/2;
@@ -109,6 +122,9 @@ input[type='checkbox'] {
     }
     .gform_button {
       @apply py-3 text-sm;
+    }
+    .validation_error {
+      @apply absolute -mt-6 text-sm;
     }
   }
 }
