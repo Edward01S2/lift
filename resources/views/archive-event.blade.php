@@ -9,6 +9,7 @@
 
   <section>
     <div class="event-container container mx-auto lg:mt-4 xl:pt-8">
+      {{-- @dump($current_loop) --}}
       @foreach($current_loop as $event)
       <article class="group transform transition-300 hover:scale-101">
         <a href="{!! $event['link'] !!}" class="event">

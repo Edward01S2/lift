@@ -7,7 +7,7 @@ export default {
 
     $(".archive-event").click(function () {
       var count = $('.event').length;
-      //console.log(count);
+      console.log(count);
       //console.log('/wp-json/wpc/v1/event/' + count);
       $.ajax({
         url: '/wp-json/wpc/v1/event/' + count,
@@ -15,13 +15,14 @@ export default {
         success : function(data) {
           //console.log(data);
           if(data !== null ) {
+            //console.log(data);
             $.each(data, function(i, event) {
 
               var str = '<article>'
               str += '<a href="' + event.link + '" class="group event">'
               str += '<div class="group-hover:opacity-75 md:flex md:p-4 lg:shadow lg:shadow-md lg:p-0 lg:m-4 lg:mb-4 xl:mb-8 xl:mx-0">'
               str += '<div class="relative md:w-1/2">'
-              str += '<img class="w-full h-full xl:object-cover xl:object-center xl:h-66" src="' + event.img + '" alt="">'
+              str += '<img class="w-full h-full xl:object-cover xl:object-center xl:h-66" src="' + event.image + '" alt="">'
               str += '<div class="absolute top-0 left-0">'
               str += '<div class="flex flex-col bg-l-orange py-2 px-3 lg:px-4 lg:py-3">'
               str += '<span class="text-white text-center uppercase font-semibold tracking-wider lg:text-xl">' + event.day + '</span>'
