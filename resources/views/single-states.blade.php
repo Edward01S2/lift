@@ -98,7 +98,7 @@
     <div class="container mx-auto py-4 md:py-8">
       <h2 class="text-center font-semibold px-4 text-2xl leading-tight pb-4 md:px-40 md:pb-8 xl:text-3xl">Digitally Empowered Small Businesses in {!! $state->label !!}</h2>
       <div class="flex flex-col md:flex-row md:px-4 xl:px-0">
-        @if(count($get_state[0]['stories']) > 1)
+        @if(count($get_state[0]['stories']) > 0)
           <div class="md:w-1/2">
         @else
           <div class="md:w-full">
@@ -112,7 +112,7 @@
           </div>
         </div>
         
-        @if(count($get_state[0]['stories']) > 1)
+        @if(count($get_state[0]['stories']) > 0)
         <div id="sub-stories" class="md:w-1/2 grid grid-cols-2 gap-4 mt-4 mx-4 grid-rows-3 md:mt-0 md:grid-cols-3 md:mx-0 md:pl-4 lg:h-72 xl:h-78">
         @foreach($get_state[0]['stories'] as $state)
           <a class="relative block w-full h-40 md:h-full lg:h-full transform hover:scale-101" href="{!! $state['link'] !!}" data-id="{!! $state['id'] !!}">
