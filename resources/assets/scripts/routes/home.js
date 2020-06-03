@@ -10,7 +10,7 @@ export default {
 
         var state = data.name;
         $.ajax({
-          url: window.location.href + 'wp-json/wpc/v1/story/?state=' + data.name + '&count=4',
+          url: '/wp-json/wpc/v1/story/?state=' + data.name + '&count=4',
           type: 'GET',
           success : function(data) {
             //console.log(state);
@@ -65,9 +65,9 @@ export default {
     $('#story-subtitle').html('Stories from <a class="hover:text-l-orange" href="/stories/?state=' + acf_data.default_state.value +'">' + acf_data.default_state.label + '</a>');
 
     //Set state stories initially from default state field
-    //console.log(window.location.href + 'wp-json/wpc/v1/story/?state=' + acf_data.default_state.value + '&count=4');
+    //console.log('/wp-json/wpc/v1/story/?state=' + acf_data.default_state.value + '&count=4');
     $.ajax({
-      url: window.location.href + 'wp-json/wpc/v1/story/?state=' + acf_data.default_state.value + '&count=4',
+      url:'/wp-json/wpc/v1/story/?state=' + acf_data.default_state.value + '&count=4',
       type: 'GET',
       success : function(data) {
         //console.log(data);
