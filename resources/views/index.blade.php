@@ -12,9 +12,9 @@
         @foreach($current_loop as $post)
           @if ($loop->index < 2)
           @if ($post['external'])
-            <a class="group news-post" target="_blank" href="{!! $post['external'] !!}">
+            <a class="group news-post bg-white" target="_blank" href="{!! $post['external'] !!}">
           @else
-            <a class="group news-post" href="{!! $post['link'] !!}">
+            <a class="group news-post bg-white" href="{!! $post['link'] !!}">
           @endif
             <div class="flex flex-col">
               <div class="h-48 relative md:h-56 lg:h-64 xl:h-72">
