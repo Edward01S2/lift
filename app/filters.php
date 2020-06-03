@@ -108,6 +108,7 @@ function story_endpoint() {
       $posts = get_posts( array(
         'post_type' => 'story',
         'numberposts'=> '-1',
+        'post_status' => 'publish',
     ) );
     }
     else {
@@ -166,6 +167,7 @@ function event_endpoint () {
   $args = array(
     'post_type' => 'event',
     'posts_per_page'=> '-1',
+    'post_status' => 'publish',
     'order' => 'DESC',
     'orderby' => 'meta_value_num',
     'meta_key' => 'event_date',
@@ -260,6 +262,7 @@ function post_endpoint () {
       //Here we can get more than one post type. Useful to a home page.
       'post_type'     => 'post',
       'offset'=> $offset,
+      'post_status' => 'publish',
   );
 
   if(isset($_POST['tag'])) {
@@ -338,6 +341,7 @@ function search_stories(){
     $args = array(
         'post_type' => 'story',
         'posts_per_page' => -1,
+        'post_status' => 'publish',
         's' => $search
     );
     
@@ -415,6 +419,7 @@ function get_story(){
 
   $args = array(
     'p' => $id,
+    'post_status' => 'publish',
   );
   
   //echo $search;
