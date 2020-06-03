@@ -10,18 +10,24 @@ export default {
 
         var state = data.name;
         $.ajax({
-          url: '/wp-json/wpc/v1/story/?state=' + data.name + '&count=4',
-          type: 'GET',
+          type:"POST",
+          url: ajax_url.ajax_url,
+          data: {
+              action:'story_endpoint', 
+              state: state,
+              count: 4,
+          },
           success : function(data) {
             //console.log(state);
             if(data) {
+              var data = JSON.parse(data);
               var str = '<div class="home-story">'
               $.each(data, function(i, story) {
                 if(story.img) {
                   str +='<a class="transform hover:scale-101" href="' + story.link + '">';
                   str +='<img src="' + story.img + '"/>';
                   str +='</a>';
-                  console.log(data.length);
+                  //console.log(data.length);
                   if(data.length > 2) {
                     $('.story-btn').addClass('md:-mt-10 lg:-mt-12');
                   }
@@ -67,10 +73,18 @@ export default {
     //Set state stories initially from default state field
     //console.log('/wp-json/wpc/v1/story/?state=' + acf_data.default_state.value + '&count=4');
     $.ajax({
-      url:'/wp-json/wpc/v1/story/?state=' + acf_data.default_state.value + '&count=4',
-      type: 'GET',
+      // url:'/wp-json/wpc/v1/story/?state=' + acf_data.default_state.value + '&count=4',
+      // type: 'GET',
+      type:"POST",
+      url: ajax_url.ajax_url,
+      data: {
+          action:'story_endpoint', 
+          state: acf_data.default_state.value,
+          count: 4,
+      },
       success : function(data) {
         //console.log(data);
+        var data = JSON.parse(data);
         var str = '<div class="home-story">'
         $.each(data, function(i, story) {
           if(story.img) {

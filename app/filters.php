@@ -101,16 +101,18 @@ add_filter('comments_template', function ($comments_template) {
 //     return $data;
 // });
 
-function story_endpoint ( $data ) {
-    if(isset($_GET['all'])) {
+function story_endpoint() {
+    //echo $_POST['state'];
+    // echo 'got here';
+    if(isset($_POST['all'])) {
       $posts = get_posts( array(
         'post_type' => 'story',
         'numberposts'=> '-1',
     ) );
     }
     else {
-      $num = $_GET['count'];
-      $state_url = $_GET['state'];
+      $num = $_POST['count'];
+      $state_url = $_POST['state'];
       $posts = get_posts( array(
           'numberposts'   => $num,
           //Here we can get more than one post type. Useful to a home page.
@@ -123,6 +125,7 @@ function story_endpoint ( $data ) {
     if ( empty( $posts ) ) {
         return null;
     }
+
     
     $val = array();    
     $count = 0;
@@ -140,19 +143,24 @@ function story_endpoint ( $data ) {
       $val[$count]['state'] = $state;  
       $count ++;
     }
-    return $val;
+    echo json_encode($val);
     //return $data['state'];
+    
+  die();
 }
 
+add_action('wp_ajax_story_endpoint', __NAMESPACE__ . '\\story_endpoint');
+add_action('wp_ajax_nopriv_story_endpoint', __NAMESPACE__ . '\\story_endpoint');
+
 //wp-json/wpc/v1/story-home/?state-abbreviation
-add_action( 'rest_api_init', function () {
-  register_rest_route( 'wpc/v1', '/story/', 
-    array(
-        'methods' => 'GET',
-        'callback' => __NAMESPACE__ . '\\story_endpoint',
-    ) 
-  );
-} );
+// add_action( 'rest_api_init', function () {
+//   register_rest_route( 'wpc/v1', '/story/', 
+//     array(
+//         'methods' => 'GET',
+//         'callback' => __NAMESPACE__ . '\\story_endpoint',
+//     ) 
+//   );
+// } );
 
 function event_endpoint ( $data ) {
   $args = array(
@@ -218,6 +226,10 @@ function event_endpoint ( $data ) {
   else {
     return null;
   }
+
+  wp_reset_query();
+    
+  die();
 }
 
 //wp-json/wpc/v1/event/?2
@@ -296,17 +308,24 @@ function post_endpoint ( $data ) {
   else {
     return null;
   }
+
+  wp_reset_query();
+    
+  die();
 }
 
-//wp-json/wpc/v1/story-home/?state-abbreviation
-add_action( 'rest_api_init', function () {
-register_rest_route( 'wpc/v1', '/posts/', 
-  array(
-      'methods' => 'GET',
-      'callback' => __NAMESPACE__ . '\\post_endpoint',
-  ) 
-);
-} );
+add_action('wp_ajax_post_endpoint', __NAMESPACE__ . '\\post_endpoint');
+add_action('wp_ajax_nopriv_post_endpoint', __NAMESPACE__ . '\\post_endpoint');
+
+// //wp-json/wpc/v1/story-home/?state-abbreviation
+// add_action( 'rest_api_init', function () {
+// register_rest_route( 'wpc/v1', '/posts/', 
+//   array(
+//       'methods' => 'GET',
+//       'callback' => __NAMESPACE__ . '\\post_endpoint',
+//   ) 
+// );
+// } );
 
 function search_stories(){
     //$search = sanitize_text_field( $_POST[ 'search_string' ] );
