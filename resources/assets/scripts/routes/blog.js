@@ -19,18 +19,26 @@ export default {
 
     $(".post-load-btn").click(function () {
       var count = $('.news-post').length;
-      var url = window.location.origin + '/wp-json/wpc/v1/posts/?trim=15&count=8&offset=' + count;
+      //var url = window.location.origin + '/wp-json/wpc/v1/posts/?trim=15&count=8&offset=' + count;
       var cat = getParameterByName('cat');
-      if(cat !== null) {
-        url += '&cat=' + cat;
-      }
+      // if(cat !== null) {
+      //   url += '&cat=' + cat;
+      // }
 
-      console.log(url);
+      //console.log(url);
       $.ajax({
-        url: url,
-        type: 'GET',
+        type:"POST",
+        url: ajax_url.ajax_url,
+        data: {
+            action:'post_endpoint', 
+            offset: count,
+            count: 8,
+            trim: 15,
+            cat: (cat !==null) ? cat : null,
+        },
         success : function(data) {
-          console.log(data);
+          // console.log(data);
+          var data = JSON.parse(data);
           if(data !== null ) {
             $.each(data, function(i, post) {
             if(post.external !== null) {

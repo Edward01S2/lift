@@ -7,15 +7,22 @@ export default {
 
     $(".archive-event").click(function () {
       var count = $('.event').length;
-      console.log(count);
+      //console.log(count);
       //console.log('/wp-json/wpc/v1/event/' + count);
       $.ajax({
-        url: '/wp-json/wpc/v1/event/' + count,
-        type: 'GET',
+        // url: '/wp-json/wpc/v1/event/' + count,
+        // type: 'GET',
+        type:"POST",
+        url: ajax_url.ajax_url,
+        data: {
+            action:'event_endpoint', 
+            count: count,
+        },
         success : function(data) {
           //console.log(data);
           if(data !== null ) {
             //console.log(data);
+            var data = JSON.parse(data);
             $.each(data, function(i, event) {
 
               var str = '<article>'

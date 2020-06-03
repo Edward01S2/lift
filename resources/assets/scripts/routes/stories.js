@@ -15,17 +15,23 @@ export default {
     if(cat !== null) {
       $('.state-filter').val(cat);
 
-      var url = '/wp-json/wpc/v1/story/?state=' + cat + '&count=-1';
+      //var url = '/wp-json/wpc/v1/story/?state=' + cat + '&count=-1';
 
       $.ajax({
-        url: url,
-        type: 'GET',
+        // url: url,
+        // type: 'GET',
+        type:"POST",
+        url: ajax_url.ajax_url,
+        data: {
+            action:'story_endpoint', 
+            state: cat,
+        },
         success : function(data) {
           //console.log(data);
           if(data) {
             //console.log(data);
+            var data = JSON.parse(data);
             $('.story-box-container').html(' ');
-            
             $.each(data, function(i, story) {
               var str = "";
               str += '<a class="story-box col-span-1 relative overflow-hidden" href="' + story.link + '">'
@@ -44,7 +50,7 @@ export default {
             })
           }
           else {
-            console.log('errror');
+            console.log('error');
           }
 
         },
@@ -61,19 +67,21 @@ export default {
       var state = this.value;
       //console.log(state);
       if(state === 'ALL') {
-        var url = '/wp-json/wpc/v1/story/?all=true'
-      }
-      else {
-        var url = '/wp-json/wpc/v1/story/?state=' + state + '&count=-1';
+        var state = 'all';
       }
       //console.log(url)
       $.ajax({
-        url: url,
-        type: 'GET',
+        type:"POST",
+        url: ajax_url.ajax_url,
+        data: {
+            action:'story_endpoint', 
+            state: state,
+        },
         success : function(data) {
           //console.log(data);
           if(data) {
             //console.log(data);
+            var data = JSON.parse(data);
             $('.story-box-container').html(' ');
             
             $.each(data, function(i, story) {
@@ -107,7 +115,7 @@ export default {
     $("#searchsubmit").click(function(e){
       e.preventDefault();
       var search_val=$("#s").val();
-      console.log(search_val) 
+      //console.log(search_val) 
       $.ajax({
           type:"POST",
           url: ajax_url.ajax_url,

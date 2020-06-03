@@ -19,9 +19,10 @@ export default {
           },
           success : function(data) {
             //console.log(state);
-            if(data) {
+            if(data != 0) {
               var data = JSON.parse(data);
-              var str = '<div class="home-story">'
+              var str = '<div class="home-story">';
+              console.log(data);
               $.each(data, function(i, story) {
                 if(story.img) {
                   str +='<a class="transform hover:scale-101" href="' + story.link + '">';

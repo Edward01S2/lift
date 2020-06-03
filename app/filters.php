@@ -104,7 +104,7 @@ add_filter('comments_template', function ($comments_template) {
 function story_endpoint() {
     //echo $_POST['state'];
     // echo 'got here';
-    if(isset($_POST['all'])) {
+    if($_POST['state'] === 'all') {
       $posts = get_posts( array(
         'post_type' => 'story',
         'numberposts'=> '-1',
@@ -162,7 +162,7 @@ add_action('wp_ajax_nopriv_story_endpoint', __NAMESPACE__ . '\\story_endpoint');
 //   );
 // } );
 
-function event_endpoint ( $data ) {
+function event_endpoint () {
   $args = array(
     'post_type' => 'event',
     'posts_per_page'=> '-1',
@@ -220,7 +220,7 @@ function event_endpoint ( $data ) {
       $val[$index]['address'] = $address;  
       $index ++;
     endwhile;
-  return $val;
+  echo json_encode($val);
   // //return $data['state'];
   }
   else {
@@ -232,24 +232,27 @@ function event_endpoint ( $data ) {
   die();
 }
 
+add_action('wp_ajax_event_endpoint', __NAMESPACE__ . '\\event_endpoint');
+add_action('wp_ajax_nopriv_event_endpoint', __NAMESPACE__ . '\\event_endpoint');
+
 //wp-json/wpc/v1/event/?2
-add_action( 'rest_api_init', function () {
-register_rest_route( 'wpc/v1', 
-  '/event/(?P<count>\d+)', 
-  array(
-      'methods' => 'GET',
-      'callback' => __NAMESPACE__ . '\\event_endpoint',
-  ) 
-);
-} );
+// add_action( 'rest_api_init', function () {
+// register_rest_route( 'wpc/v1', 
+//   '/event/(?P<count>\d+)', 
+//   array(
+//       'methods' => 'GET',
+//       'callback' => __NAMESPACE__ . '\\event_endpoint',
+//   ) 
+// );
+// } );
 
-function post_endpoint ( $data ) {
+function post_endpoint () {
 
-  if(isset($_GET['offset'])) {
-    $offset = $_GET['offset'];
+  if(isset($_POST['offset'])) {
+    $offset = $_POST['offset'];
   }
-  if(isset($_GET['count'])) {
-    $count = $_GET['count'];
+  if(isset($_POST['count'])) {
+    $count = $_POST['count'];
   }
 
   $query_args = array(
@@ -259,19 +262,19 @@ function post_endpoint ( $data ) {
       'offset'=> $offset,
   );
 
-  if(isset($_GET['tag'])) {
-    $query_args['tag'] = $_GET['tag'];
+  if(isset($_POST['tag'])) {
+    $query_args['tag'] = $_POST['tag'];
   } 
 
-  if(isset($_GET['cat'])) {
-    $query_args['category_name'] = $_GET['cat'];
+  if(isset($_POST['cat'])) {
+    $query_args['category_name'] = $_POST['cat'];
   } 
 
   $query = new \WP_Query($query_args);
   //return($query);
   
-  if(isset($_GET['trim'])) {
-    $trim = $_GET['trim'];
+  if(isset($_POST['trim'])) {
+    $trim = $_POST['trim'];
   }   
 
   
@@ -302,7 +305,7 @@ function post_endpoint ( $data ) {
   // return $val;
   //return $data['state'];
   endwhile;
-  return $val;
+  echo json_encode($val);
 // //return $data['state'];
   }
   else {
